@@ -15,13 +15,27 @@
               "state": {
                 "file": "面试/面试准备.canvas",
                 "viewState": {
-                  "x": -55.873846209630756,
-                  "y": -416.3790970698989,
-                  "zoom": -1.9999999999999998
+                  "x": 156.89748829269195,
+                  "y": -421.0265036387194,
+                  "zoom": -1.1102230246251565e-16
                 }
               },
               "icon": "lucide-layout-dashboard",
               "title": "面试准备"
+            }
+          },
+          {
+            "id": "ca11ad84a6e3d610",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "面试/自我介绍.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "自我介绍"
             }
           },
           {
@@ -159,17 +173,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "面试/RLHF.md",
+                "file": "面试/面试准备.canvas",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "RLHF 的大纲"
+              "title": "面试准备 的大纲"
+            }
+          },
+          {
+            "id": "289c20cd0c33f7aa",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -185,12 +209,18 @@
       "command-palette:打开命令面板": false,
       "workspaces:管理工作区布局": false,
       "random-note:开始漫游笔记": false,
-      "markdown-importer:打开 Markdown 格式转换器": false
+      "markdown-importer:打开 Markdown 格式转换器": false,
+      "obsidian-git:Open Git source control": false
     }
   },
   "active": "80c67b999069a4c7",
   "lastOpenFiles": [
+    "面试/自我介绍.md",
     "面试/面试准备.canvas",
+    "面试/OpenWebUI.md",
+    "面试/LangChain.md",
+    "面试/HuggingFace.md",
+    "面试/RAG检索增强生成.md",
     "面试/RLHF.md",
     "面试/BERT、GPT架构对比.md",
     "面试/Transformer架构.md",
@@ -221,11 +251,6 @@
     "JDBC/atguigu-jdbc/src/www/twilight/senior/util",
     "JDBC/atguigu-jdbc/src/www/twilight/senior",
     "JDBC/进阶篇.md",
-    "othors/影刀.md",
-    "大二下/高级数据结构/20250418.md",
-    "大二下/高级数据结构/7.Augmenting Data Structures.md",
-    "MySQL-study/约束.md",
-    "大二下/未命名.md",
     "othors/软件架构实验二 计划.canvas",
     "imgs/Pasted image 20250419163321.png",
     "imgs/Pasted image 20250419164218.png",
