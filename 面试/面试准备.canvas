@@ -1,0 +1,17 @@
+{
+	"nodes":[
+		{"id":"8e217c77fb2f4733","type":"file","file":"面试/Python相关.md","x":-960,"y":-960,"width":545,"height":545},
+		{"id":"ea2ae265a33c509e","type":"file","file":"面试/Transformer架构.md","x":-1008,"y":-73,"width":640,"height":460},
+		{"id":"5b4a6b8ea620fd73","type":"file","file":"面试/ai 面试.md","x":-175,"y":-1720,"width":780,"height":680},
+		{"id":"031899a3ec17bc35","type":"file","file":"面试计划2.md","x":-175,"y":-740,"width":780,"height":740},
+		{"id":"164a0963f85a50fc","type":"file","file":"面试/BERT、GPT架构对比.md","x":1000,"y":-1126,"width":949,"height":773},
+		{"id":"0c240fb10e724719","x":-175,"y":140,"width":735,"height":820,"type":"file","file":"面试/RLHF.md"}
+	],
+	"edges":[
+		{"id":"30d7e933239b76f6","fromNode":"5b4a6b8ea620fd73","fromSide":"bottom","toNode":"031899a3ec17bc35","toSide":"top"},
+		{"id":"6ad932006a887c98","fromNode":"031899a3ec17bc35","fromSide":"left","toNode":"8e217c77fb2f4733","toSide":"right"},
+		{"id":"68cffb0fd4b0ff04","fromNode":"031899a3ec17bc35","fromSide":"left","toNode":"ea2ae265a33c509e","toSide":"right"},
+		{"id":"1a400a806e360ee9","fromNode":"031899a3ec17bc35","fromSide":"bottom","toNode":"0c240fb10e724719","toSide":"top"},
+		{"id":"82471679e7bd3642","fromNode":"031899a3ec17bc35","fromSide":"right","toNode":"164a0963f85a50fc","toSide":"left"}
+	]
+}
