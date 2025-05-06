@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"www.twilight.other","c":"Calculator","l":"add(int, int)","u":"add(int,int)"},{"p":"www.twilight.other","c":"Calculator","l":"Calculator()","u":"%3Cinit%3E()"},{"p":"www.twilight.other","c":"Calculator","l":"subtract(int, int)","u":"subtract(int,int)"}];updateSearchResults();
