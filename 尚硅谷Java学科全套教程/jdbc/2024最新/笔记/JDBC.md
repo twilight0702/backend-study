@@ -1341,7 +1341,7 @@ public class EmployeeDaoImpl extends BaseDAO implements EmployeeDao {
 
 - 关键代码：
 
-  - ```java
+  ```java
     try{
         connection.setAutoCommit(false); //关闭自动提交了
         //connection.setAutoCommit(false)也就类型于SET autocommit = off
@@ -1365,7 +1365,7 @@ public class EmployeeDaoImpl extends BaseDAO implements EmployeeDao {
 
 - 准备数据库表：
 
-  - ```sql
+```sql
     -- 继续在atguigu的库中创建银行表
     CREATE TABLE t_bank(
        id INT PRIMARY KEY AUTO_INCREMENT COMMENT '账号主键',
@@ -1375,11 +1375,10 @@ public class EmployeeDaoImpl extends BaseDAO implements EmployeeDao {
     INSERT INTO t_bank(account,money) VALUES
       ('zhangsan',1000),('lisi',1000);
     
-    ```
+```
 
 - DAO接口代码：
-
-  - ```java
+```java
     public interface BankDao{
         int addMoney(Integer id,Integer money);
     
@@ -1389,7 +1388,7 @@ public class EmployeeDaoImpl extends BaseDAO implements EmployeeDao {
 
 - DAO实现类代码：
 
-  - ```java
+```java
     public class BankDaoImpl  extends BaseDao implements BankDao{
         public int addMoney(Integer id,Integer money){
             try {
@@ -1413,7 +1412,7 @@ public class EmployeeDaoImpl extends BaseDAO implements EmployeeDao {
 
 - 测试代码：
 
-  - ```java
+```java
      @Test
         public void testTransaction(){
             BankDao bankDao = new BankDaoImpl();

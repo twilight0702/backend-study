@@ -1,13 +1,16 @@
 package www.twilight.senior;
 
 import org.junit.Test;
+import www.twilight.senior.dao.BankDao;
 import www.twilight.senior.dao.EmployeeDao;
+import www.twilight.senior.dao.impl.BankDaoImpl;
 import www.twilight.senior.dao.impl.EmployeeDaoImpl;
 import www.twilight.senior.pojo.Employee;
 import www.twilight.senior.util.JDBCUtil;
 import www.twilight.senior.util.JDBCUtilV2;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 public class JDBCUtilTest {
@@ -55,5 +58,34 @@ public class JDBCUtilTest {
         System.out.println(i);
 
 
+    }
+
+    @Test
+    public void testTransaction(){
+        Connection connection =null;
+        try {
+            BankDao bankDao = new BankDaoImpl();
+
+            connection = JDBCUtilV2.getConnection();
+            connection.setAutoCommit(false); //开启事务，修改成手动提交
+
+            bankDao.addMoney(1,100);
+            bankDao.subMoney(2,100);
+
+            //前置的多条dao操作没有异常，就提交
+            connection.commit();
+        } catch (Exception e) {
+            try {
+                if (connection != null) {
+                    //执行有异常就回滚
+                    connection.rollback();
+                }
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        }finally{
+            //释放连接
+            JDBCUtilV2.release();
+        }
     }
 }

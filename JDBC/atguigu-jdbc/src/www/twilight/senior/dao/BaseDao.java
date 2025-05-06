@@ -41,7 +41,9 @@ public class BaseDao {
 
         //释放资源
         preparedStatement.close();
-        JDBCUtilV2.release();
+        if(connection.getAutoCommit()){
+            JDBCUtilV2.release();
+        }
 
         //返回结果
         return result;
@@ -104,7 +106,10 @@ public class BaseDao {
         //释放资源
         resultSet.close();
         preparedStatement.close();
-        JDBCUtilV2.release();
+        if(connection.getAutoCommit()){
+            JDBCUtilV2.release();
+        }
+
 
         return list;
     }

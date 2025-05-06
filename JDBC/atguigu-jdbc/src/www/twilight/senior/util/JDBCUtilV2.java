@@ -63,6 +63,8 @@ public class JDBCUtilV2 {
                 //将connection从threadLocal中移除
                 threadLocal.remove();
                 //将连接还给连接池
+                //如果开启了手动提交，操作完毕后归还给连接池的时候需要修改回自动提交
+                connection.setAutoCommit(true);
                 connection.close();
             }
         } catch (SQLException e) {

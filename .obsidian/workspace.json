@@ -4,20 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "48aaed008d74c069",
+        "id": "e0d4f54859f15498",
         "type": "tabs",
-        "dimension": 53.14232902033271,
         "children": [
           {
-            "id": "f7d1262d14b2f799",
+            "id": "9a91f3230193e830",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "软件架构/Unit6 软件架构与敏捷开发.pdf"
+                "file": "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-file-text",
-              "title": "Unit6 软件架构与敏捷开发"
+              "icon": "lucide-file",
+              "title": "JDBC"
             }
           }
         ]
@@ -25,7 +26,6 @@
       {
         "id": "9209557a634beb6a",
         "type": "tabs",
-        "dimension": 46.85767097966728,
         "children": [
           {
             "id": "a58c17c8d0b15f72",
@@ -84,31 +84,17 @@
             }
           },
           {
-            "id": "9fcbce553fa6d7e3",
+            "id": "e2154d476e8fc041",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "软件架构/软件架构和敏捷开发.md",
+                "file": "JDBC/高级篇.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "软件架构和敏捷开发"
-            }
-          },
-          {
-            "id": "9a91f3230193e830",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "JDBC"
+              "title": "高级篇"
             }
           }
         ],
@@ -144,7 +130,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "xiao",
+                "query": "事务",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -234,13 +220,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "软件架构/软件架构和敏捷开发.md",
+                "file": "JDBC/高级篇.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "软件架构和敏捷开发 的大纲"
+              "title": "高级篇 的大纲"
             }
           },
           {
@@ -276,26 +262,28 @@
   },
   "active": "289c20cd0c33f7aa",
   "lastOpenFiles": [
-    "软件架构/Unit6 软件架构与敏捷开发.pdf",
-    "软件架构/软件架构和敏捷开发.md",
-    "JDBC/高级篇.md",
-    "八股/MySQL八股1.md",
     "JDBC/atguigu-jdbc/src/www/twilight/senior/JDBCUtilTest.java~",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/senior/JDBCUtilTest.class",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/senior/dao/impl/EmployeeDaoImpl.class",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/senior/dao/impl",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/senior/dao/BaseDao.class",
-    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/EmployeeDaoImpl.java~",
-    "服务器初试.md",
-    "othors/一些好的up主.md",
     "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.md",
+    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/BankDaoImpl.java~",
+    "JDBC/高级篇.md",
+    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/BankDaoImpl.java",
+    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/BankDao.java~",
+    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/BankDao.java",
+    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/BankDao.java",
+    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/BaseDao.java~",
+    "服务器初试.md",
+    "软件架构/软件架构设计和实现.md",
+    "八股/MySQL八股1.md",
+    "软件架构/Unit8 软件体系结构建模方法.pdf",
+    "1746504188501.jpg",
+    "Unit8 软件体系结构建模方法.pdf",
+    "软件架构/软件架构和敏捷开发.md",
+    "软件架构/Unit6 软件架构与敏捷开发.pdf",
+    "othors/一些好的up主.md",
     "othors/反射机制.md",
     "Java向上转型.md",
     "工厂模式.md",
     "Pasted image 20250505213330.png",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/other/B.class",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/other/A.class",
-    "JDBC/atguigu-jdbc/out/production/atguigu-jdbc/www/twilight/other/Test.class",
     "大二下/高级数据结构/5 week.md",
     "大二下/高级数据结构/4 week.md",
     "大二下/高级数据结构/4 详细解释.md",
@@ -316,13 +304,11 @@
     "othors/IntelliJ IDEA使用技巧汇总.md",
     "othors/B站视频零碎知识点.md",
     "othors/资源目录.md",
-    "othors/影刀.md",
     "面试/面试准备.canvas",
     "othors/软件架构实验二 计划.canvas",
     "imgs/Pasted image 20250419163321.png",
     "imgs/Pasted image 20250419164218.png",
     "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.assets/image-20240228205242420.png",
-    "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.assets/image-20240228205157212.png",
     "未命名 1.canvas"
   ]
 }
