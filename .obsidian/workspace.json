@@ -4,101 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "e0d4f54859f15498",
+        "id": "a9f891b503e29c85",
         "type": "tabs",
         "children": [
           {
-            "id": "9a91f3230193e830",
+            "id": "2221f4108788f402",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.md",
+                "file": "八股/小林/2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "JDBC"
-            }
-          }
-        ]
-      },
-      {
-        "id": "9209557a634beb6a",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "a58c17c8d0b15f72",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "八股/MySQL八股1.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "MySQL八股1"
+              "title": "2"
             }
           },
           {
-            "id": "854484a9ebf81012",
+            "id": "67e748e703fe3fc2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "大二下/高级数据结构/5 week.md",
+                "file": "Java向上转型.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "5 week"
+              "title": "Java向上转型"
             }
           },
           {
-            "id": "3668cf21fea12152",
+            "id": "bcb2ad5606b970a3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "大二下/高级数据结构/4 week.md",
+                "file": "面试/深入项目.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4 week"
-            }
-          },
-          {
-            "id": "4f6c811da037442a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "服务器初试.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "服务器初试"
-            }
-          },
-          {
-            "id": "e2154d476e8fc041",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "JDBC/高级篇.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "高级篇"
+              "title": "深入项目"
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -155,8 +107,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 295.5,
-    "collapsed": true
+    "width": 295.5
   },
   "right": {
     "id": "56a196002a9caf7b",
@@ -215,21 +166,6 @@
             }
           },
           {
-            "id": "c25974f4e4a4ca3a",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "JDBC/高级篇.md",
-                "followCursor": true,
-                "showSearch": true,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "高级篇 的大纲"
-            }
-          },
-          {
             "id": "289c20cd0c33f7aa",
             "type": "leaf",
             "state": {
@@ -238,9 +174,24 @@
               "icon": "git-pull-request",
               "title": "Source Control"
             }
+          },
+          {
+            "id": "c25974f4e4a4ca3a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "面试/深入项目.md",
+                "followCursor": true,
+                "showSearch": true,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "深入项目 的大纲"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -262,48 +213,49 @@
   },
   "active": "289c20cd0c33f7aa",
   "lastOpenFiles": [
+    "服务器初试.md",
+    "面试/深入项目.md",
+    "八股/小林/2.md",
+    "未命名.md",
+    "八股/小林/8.md",
+    "八股/小林/7.md",
+    "八股/小林/6.md",
+    "八股/小林/5.md",
+    "八股/小林/4.md",
+    "八股/小林/3.md",
+    "八股/小林/1.md",
+    "八股/小林/17.md",
+    "八股/小林/16.md",
+    "八股/小林/15.md",
+    "八股/小林/14.md",
+    "八股/小林/13.md",
+    "八股/小林/12.md",
+    "八股/小林/11.md",
+    "八股/小林/10.md",
+    "八股/小林/9.md",
+    "八股/小林",
+    "Java向上转型.md",
+    "bin目录.md",
+    "Java 常见技术栈.md",
+    "Unit8 软件体系结构建模方法.pdf",
+    "othors/反射机制.md",
+    "othors/类加载器.md",
+    "othors/流程自动化开发.md",
+    "JDBC/learn_XML/learn_XML.iml",
+    "JDBC/learn_XML/src",
+    "JDBC/learn_XML",
+    "Spring",
     "JDBC/atguigu-jdbc/src/www/twilight/senior/JDBCUtilTest.java~",
-    "尚硅谷Java学科全套教程/jdbc/2024最新/笔记/JDBC.md",
     "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/BankDaoImpl.java~",
-    "JDBC/高级篇.md",
     "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/BankDaoImpl.java",
     "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/BankDao.java~",
-    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/BankDao.java",
-    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/impl/BankDao.java",
-    "JDBC/atguigu-jdbc/src/www/twilight/senior/dao/BaseDao.java~",
-    "服务器初试.md",
-    "软件架构/软件架构设计和实现.md",
-    "八股/MySQL八股1.md",
-    "软件架构/Unit8 软件体系结构建模方法.pdf",
     "1746504188501.jpg",
-    "Unit8 软件体系结构建模方法.pdf",
-    "软件架构/软件架构和敏捷开发.md",
-    "软件架构/Unit6 软件架构与敏捷开发.pdf",
-    "othors/一些好的up主.md",
-    "othors/反射机制.md",
-    "Java向上转型.md",
-    "工厂模式.md",
     "Pasted image 20250505213330.png",
-    "大二下/高级数据结构/5 week.md",
-    "大二下/高级数据结构/4 week.md",
-    "大二下/高级数据结构/4 详细解释.md",
-    "八股/Java基础.md",
     "Pasted image 20250503180322.png",
     "Pasted image 20250503180318.png",
     "imgs/Pasted image 20250503180137.png",
-    "软件架构/其他架构风格.md",
-    "JDBC/atguigu-jdbc/docs/legal/jquery.md",
-    "JDBC/atguigu-jdbc/docs/legal/jqueryUI.md",
     "JDBC/atguigu-jdbc/docs/resources/glass.png",
     "JDBC/atguigu-jdbc/docs/resources/x.png",
-    "面试计划2.md",
-    "命令行.md",
-    "学习Docker、Linux 和服务器计划.md",
-    "othors/java编译成可执行文件.md",
-    "othors/Java编译运行过程.md",
-    "othors/IntelliJ IDEA使用技巧汇总.md",
-    "othors/B站视频零碎知识点.md",
-    "othors/资源目录.md",
     "面试/面试准备.canvas",
     "othors/软件架构实验二 计划.canvas",
     "imgs/Pasted image 20250419163321.png",
