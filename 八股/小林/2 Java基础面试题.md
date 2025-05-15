@@ -817,39 +817,37 @@ constructors，因为接口不会有自己的实例的，所以不需要有构�
 
 **使用new关键字** ：通过new关键字直接调用类的构造方法来创建对象。
 
-    
-    
+```java
+ 
     MyClass obj = new MyClass();
-    
+```
 
 **使用Class类的newInstance()方法** ：通过反射机制，可以使用Class类的newInstance()方法创建对象。
 
-    
-    
+```java
     MyClass obj = (MyClass) Class.forName("com.example.MyClass").newInstance();
-    
+```
 
 **使用Constructor类的newInstance()方法**
 ：同样是通过反射机制，可以使用Constructor类的newInstance()方法创建对象。
 
-    
-    
+```java
     Constructor<MyClass> constructor = MyClass.class.getConstructor();
     MyClass obj = constructor.newInstance();
-    
+```
+
+[[Constructor类的newInstance()方法|详细说明]]
 
 **使用clone()方法** ：如果类实现了Cloneable接口，可以使用clone()方法复制对象。
 
-    
-    
+```java
     MyClass obj1 = new MyClass();
     MyClass obj2 = (MyClass) obj1.clone();
-    
+```
 
 **使用反序列化** ：通过将对象序列化到文件或流中，然后再进行反序列化来创建对象。
 
-    
-    
+```java
     // SerializedObject.java
     ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("object.ser"));
     out.writeObject(obj);
@@ -859,83 +857,16 @@ constructors，因为接口不会有自己的实例的，所以不需要有构�
     ObjectInputStream in = new ObjectInputStream(new FileInputStream("object.ser"));
     MyClass obj = (MyClass) in.readObject();
     in.close();
-    
-
-### # Java创建对象除了new还有别的什么方式?
-
-  * **通过反射创建对象** ：通过 Java 的反射机制可以在运行时动态地创建对象。可以使用 Class 类的 newInstance() 方法或者通过 Constructor 类来创建对象。
-
-    
-    
-    public class MyClass {
-        public MyClass() {
-            // Constructor
-        }
-    }
-    
-    public class Main {
-        public static void main(String[] args) throws Exception {
-            Class<?> clazz = MyClass.class;
-            MyClass obj = (MyClass) clazz.newInstance();
-        }
-    }
-    
-
-  * **通过反序列化创建对象** ：通过将对象序列化（保存到文件或网络传输）然后再反序列化（从文件或网络传输中读取对象）的方式来创建对象，对象能被序列化和反序列化的前提是类实现Serializable接口。
-
-    
-    
-    import java.io.*;
-    
-    public class MyClass implements Serializable {
-        // Class definition
-    }
-    
-    public class Main {
-        public static void main(String[] args) throws Exception {
-            // Serialize object
-            MyClass obj = new MyClass();
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("object.ser"));
-            out.writeObject(obj);
-            out.close();
-            
-            // Deserialize object
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("object.ser"));
-            MyClass newObj = (MyClass) in.readObject();
-            in.close();
-        }
-    }
-    
-
-  * **通过clone创建对象** ：所有 Java 对象都继承自 Object 类，Object 类中有一个 clone() 方法，可以用来创建对象的副本，要使用 clone 方法，我们必须先实现 Cloneable 接口并实现其定义的 clone 方法。
-
-    
-    
-    public class MyClass implements Cloneable {
-        @Override
-        public Object clone() throws CloneNotSupportedException {
-            return super.clone();
-        }
-    }
-    
-    public class Main {
-        public static void main(String[] args) throws CloneNotSupportedException {
-            MyClass obj1 = new MyClass();
-            MyClass obj2 = (MyClass) obj1.clone();
-        }
-    }
-    
-
+```
 ### # New出的对象什么时候回收？
 
-通过过关键字`new`创建的对象，由Java的垃圾回收器（Garbage
-Collector）负责回收。垃圾回收器的工作是在程序运行过程中自动进行的，它会周期性地检测不再被引用的对象，并将其回收释放内存。
+通过过关键字`new`创建的对象，由Java的垃圾回收器[[JVM 的垃圾回收器（GC）|GC]]（Garbage Collector）负责回收。垃圾回收器的工作是在程序运行过程中自动进行的，它会周期性地检测不再被引用的对象，并将其回收释放内存。
 
-具体来说，Java对象的回收时机是由垃圾回收器根据一些算法来决定的，主要有以下几种情况：
+具体来说，Java对象的回收时机是由垃圾回收器根据一些<span style="background:rgba(240, 200, 0, 0.2)">算法</span>来决定的，主要有以下几种情况：
 
   1. 引用计数法：某个对象的引用计数为0时，表示该对象不再被引用，可以被回收。
-  2. 可达性分析算法：从根对象（如方法区中的类静态属性、方法中的局部变量等）出发，通过对象之间的引用链进行遍历，如果存在一条引用链到达某个对象，则说明该对象是可达的，反之不可达，不可达的对象将被回收。
-  3. 终结器（Finalizer）：如果对象重写了`finalize()`方法，垃圾回收器会在回收该对象之前调用`finalize()`方法，对象可以在`finalize()`方法中进行一些清理操作。然而，终结器机制的使用不被推荐，因为它的执行时间是不确定的，可能会导致不可预测的性能问题。
+  2. 可达性分析算法：从根对象（如方法区中的类静态属性、方法中的局部变量等）出发，通过对象之间的引用链进行遍历，如果存在一条引用链到达某个对象，则说明该对象是可达的，反之不可达，<span style="background:rgba(240, 200, 0, 0.2)">不可达的对象将被回收</span>。
+  3. 终结器（Finalizer）：如果对象重写了`finalize()`方法，垃圾回收器会在回收该对象之前调用`finalize()`方法，对象可以在`finalize()`方法中进行一些清理操作。<span style="background:rgba(240, 200, 0, 0.2)">然而，终结器机制的使用不被推荐</span>，因为它的执行时间是不确定的，可能会导致不可预测的性能问题。
 
 ### # 如何获取私有对象？
 
@@ -944,10 +875,9 @@ Collector）负责回收。垃圾回收器的工作是在程序运行过程中�
 
 不过，可以通过下面两种方式来间接获取私有对象。
 
-  * 使用公共访问器方法（getter 方法）：如果类的设计者遵循良好的编程规范，通常会为私有成员变量提供公共的访问器方法（即 `getter` 方法），通过调用这些方法可以安全地获取私有对象。
+- 使用公共访问器方法（getter 方法）：如果类的设计者遵循良好的编程规范，通常会为私有成员变量提供公共的访问器方法（即 `getter` 方法），通过调用这些方法可以安全地获取私有对象。
 
-    
-    
+```java
     class MyClass {
         // 私有成员变量
         private String privateField = "私有字段的值";
@@ -966,12 +896,11 @@ Collector）负责回收。垃圾回收器的工作是在程序运行过程中�
             System.out.println(value); 
         }
     }
-    
+```
 
-  * 反射机制。反射机制允许在运行时检查和修改类、方法、字段等信息，通过反射可以绕过 `private` 访问修饰符的限制来获取私有对象。
+- 反射机制。反射机制允许在运行时检查和修改类、方法、字段等信息，通过反射可以绕过 `private` 访问修饰符的限制来获取私有对象。
 
-    
-    
+```java
     import java.lang.reflect.Field;
     
     class MyClass {
@@ -993,14 +922,15 @@ Collector）负责回收。垃圾回收器的工作是在程序运行过程中�
         }
     }
     
+```
 
 ## # 反射
 
 ### # 什么是反射？
 
-Java
-反射机制是在运行状态中，对于任意一个类，都能够知道这个类中的所有属性和方法，对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为
-Java 语言的反射机制。
+[[反射机制]]
+
+Java反射机制是在运行状态中，对于任意一个类，都能够知道这个类中的所有属性和方法，对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为Java 语言的反射机制。
 
 反射具有以下特性：
 
@@ -1021,16 +951,16 @@ com.mikechen.java.myqlConnection，com.mikechen.java.oracleConnection这两个�
 这时候我们在使用 JDBC 连接数据库时使用
 Class.forName()通过反射加载数据库的驱动程序，如果是mysql则传入mysql的驱动类，而如果是oracle则传入的参数就变成另一个了。
 
-    
+```java
     
     //  DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
     Class.forName("com.mysql.cj.jdbc.Driver");
     
+```
 
 > 配置文件加载
 
-Spring 框架的 IOC（动态加载管理
-Bean），Spring通过配置文件配置各种各样的bean，你需要用到哪些bean就配哪些，spring容器就会根据你的需求去动态加载，你的程序就能健壮地运行。
+Spring 框架的 IOC（动态加载管理 Bean），Spring通过配置文件配置各种各样的bean，你需要用到哪些bean就配哪些，spring容器就会根据你的需求去动态加载，你的程序就能健壮地运行。
 
 Spring通过XML配置模式装载Bean的过程：
 
@@ -1041,27 +971,24 @@ Spring通过XML配置模式装载Bean的过程：
 
 配置文件
 
-    
-    
+```java
     className=com.example.reflectdemo.TestInvoke
     methodName=printlnState
-    
+```
 
 实体类
 
-    
-    
+```java
     public class TestInvoke {
         private void printlnState(){
             System.out.println("I am fine");
         }
     }
-    
+```
 
 解析配置文件内容
 
-    
-    
+```java
     // 解析xml或properties里面的内容，得到对应实体类的字节码字符串以及属性信息
     public static String getName(String key) throws IOException {
         Properties properties = new Properties();
@@ -1070,12 +997,11 @@ Spring通过XML配置模式装载Bean的过程：
         in.close();
         return properties.getProperty(key);
     }
-    
+```
 
 利用反射获取实体类的Class实例，创建实体类的实例对象，调用方法
 
-    
-    
+```java
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException, ClassNotFoundException, InstantiationException {
         // 使用反射机制，根据这个字符串获得Class对象
         Class<?> c = Class.forName(getName("className"));
@@ -1088,9 +1014,8 @@ Spring通过XML配置模式装载Bean的过程：
         TestInvoke testInvoke = (TestInvoke)c.newInstance();
         // 调用方法
         method.invoke(testInvoke);
-    
     }
-    
+```
 
 运行结果：
 
@@ -1104,17 +1029,17 @@ Spring通过XML配置模式装载Bean的过程：
 
 我们通过反射获取注解时，返回的是Java运行时生成的动态代理对象。通过代理对象调用自定义注解的方法，会最终调用AnnotationInvocationHandler的invoke方法。该方法会从memberValues这个Map中索引出对应的值。而memberValues的来源是Java常量池。
 
+（这部分还是有点不清楚）
 ### # 对注解解析的底层实现了解吗？
 
 注解本质上是一种特殊的接口，它继承自 `java.lang.annotation.Annotation` 接口， **所以注解也叫声明式接口**
 ，例如，定义一个简单的注解：
 
-    
-    
+```java
     public @interface MyAnnotation {
         String value();
     }
-    
+```
 
 编译后，Java 编译器会将其转换为一个继承自 `Annotation` 的接口，并生成相应的字节码文件。
 
@@ -1139,14 +1064,13 @@ Table）中，具体包括以下内容：
 
 1、获取注册信息：通过反射 API 可以获取类、方法、字段等元素上的注解。例如：
 
-    
-    
+```java
     Class<?> clazz = MyClass.class;
     MyAnnotation annotation = clazz.getAnnotation(MyAnnotation.class);
     if (annotation != null) {
         System.out.println(annotation.value());
     }
-    
+```
 
 2、底层原理：反射机制的核心类是 `java.lang.reflect.AnnotatedElement`，它是所有可以被注解修饰的元素（如
 `Class`、`Method`、`Field` 等）的父接口。该接口提供了以下方法：
@@ -1186,9 +1110,12 @@ Java异常类层次结构图：![img](https://cdn.xiaolincoding.com//picgo/17206
 
   2. **Exception（异常）** ：表示程序本身可以处理的异常条件。异常分为两大类：
 
-    * **非运行时异常** ：这类异常在编译时期就必须被捕获或者声明抛出。它们通常是外部错误，如文件不存在（FileNotFoundException）、类未找到（ClassNotFoundException）等。非运行时异常强制程序员处理这些可能出现的问题，增强了程序的健壮性。
+- **非运行时异常** ：这类异常在编译时期就必须被捕获或者声明抛出。它们通常是外部错误，如文件不存在（FileNotFoundException）、类未找到（ClassNotFoundException）等。非运行时异常强制程序员处理这些可能出现的问题，增强了程序的健壮性。
 
-    * **运行时异常** ：这类异常包括运行时异常（RuntimeException）和错误（Error）。运行时异常由程序错误导致，如空指针访问（NullPointerException）、数组越界（ArrayIndexOutOfBoundsException）等。运行时异常是不需要在编译时强制捕获或声明的。
+- **运行时异常** ：这类异常包括运行时异常（RuntimeException）和错误（Error）。运行时异常由程序错误导致，如空指针访问（NullPointerException）、数组越界（ArrayIndexOutOfBoundsException）等。运行时异常是不需要在编译时强制捕获或声明的。
+
+- **Checked Exception**：强调开发者对“外部不可控资源”的错误要做出**明确处理**，避免程序崩溃。
+- **Unchecked Exception**：大多是**程序逻辑错误**（如 null、数组越界），编译器不强制处理，鼓励在开发中通过单元测试、完善逻辑解决，而不是 try-catch 掩盖问题。
 
 ### # Java异常处理有哪些？
 
@@ -1196,8 +1123,7 @@ Java异常类层次结构图：![img](https://cdn.xiaolincoding.com//picgo/17206
 
   * try-catch语句块：用于捕获并处理可能抛出的异常。try块中包含可能抛出异常的代码，catch块用于捕获并处理特定类型的异常。可以有多个catch块来处理不同类型的异常。
 
-    
-    
+```java
     try {
         // 可能抛出异常的代码
     } catch (ExceptionType1 e1) {
@@ -1209,28 +1135,25 @@ Java异常类层次结构图：![img](https://cdn.xiaolincoding.com//picgo/17206
     } finally {
         // 可选的finally块，用于定义无论是否发生异常都会执行的代码
     }
-    
+```
 
   * throw语句：用于手动抛出异常。可以根据需要在代码中使用throw语句主动抛出特定类型的异常。
 
-    
-    
+```java
     throw new ExceptionType("Exception message");
-    
+```
 
   * throws关键字：用于在方法声明中声明可能抛出的异常类型。如果一个方法可能抛出异常，但不想在方法内部进行处理，可以使用throws关键字将异常传递给调用者来处理。
 
-    
-    
+```java
     public void methodName() throws ExceptionType {
         // 方法体
     }
-    
+```
 
   * finally块：用于定义无论是否发生异常都会执行的代码块。通常用于释放资源，确保资源的正确关闭。
 
-    
-    
+```java
     try {
         // 可能抛出异常的代码
     } catch (ExceptionType e) {
@@ -1238,7 +1161,7 @@ Java异常类层次结构图：![img](https://cdn.xiaolincoding.com//picgo/17206
     } finally {
         // 无论是否发生异常，都会执行的代码
     }
-    
+```
 
 ### # 抛出异常为什么不用throws？
 
@@ -1259,14 +1182,95 @@ finally块中的return语句会覆盖try块中的return返回，因此，该语�
 
 ### # == 与 equals 有什么区别？
 
-对于字符串变量来说，使用"=="和"equals"比较字符串时，其比较方法不同。"=="比较两个变量本身的值，即两个对象在内存中的首地址，"equals"比较字符串包含内容是否相同。
+#### ✅ 一、`==` 和 `.equals()` 的本质区别
 
-对于非字符串变量来说，如果没有对equals()进行重写的话，"==" 和
-"equals"方法的作用是相同的，都是用来比较对象在堆内存中的首地址，即用来比较两个引用变量是否指向同一个对象。
+| 比较方式        | 本质行为                  | 默认行为（Object类）   | 是否可重写行为        |
+| ----------- | --------------------- | --------------- | -------------- |
+| `==`        | 比较两个引用是否指向**同一个内存地址** | 比较内存地址          | ❌ 不可改变（比较的是引用） |
+| `.equals()` | 比较两个对象的**内容是否相同**     | 默认行为同 `==`，比较地址 | ✅ 可以被类重写       |
 
-  * ==：比较的是两个字符串内存地址（堆内存）的数值是否相等，属于数值比较；
-  * equals()：比较的是两个字符串的内容，属于内容比较。
+---
 
+#### ✅ 二、针对不同类型的比较
+
+##### 1. **基本类型（int、char、boolean 等）**
+
+```java
+int a = 10; 
+int b = 10; 
+System.out.println(a == b); // true，比较的是数值本身
+```
+
+- `==` 比较的是值，没有 `.equals()` 方法（基本类型不是对象）
+    
+
+---
+
+##### 2. **引用类型（对象，包括 String）**
+
+###### 🚩（1）默认行为（未重写 `equals()`）
+
+```java
+class A {}  
+A obj1 = new A(); 
+A obj2 = new A(); 
+System.out.println(obj1 == obj2);      // false，两个不同地址
+System.out.println(obj1.equals(obj2)); // false，Object默认也是比较地址
+```
+
+---
+
+###### 🚩（2）重写了 `equals()` 的类（如 String、Integer、List）
+
+```java
+String s1 = new String("hello"); 
+String s2 = new String("hello");  System.out.println(s1 == s2);      // false，不同对象地址
+System.out.println(s1.equals(s2)); // true，String重写了equals，比较内容
+```
+
+- `String` 是 Java 中最常被考察的类，它**重写了 equals() 方法**，用来比较字符串的实际内容。
+    
+
+---
+
+#### ⚠️ 三、字符串字面量的“常量池”特殊情况（面试常考）
+
+
+```java
+String s1 = "hello"; 
+String s2 = "hello"; 
+System.out.println(s1 == s2);      // ✅ true：来自字符串常量池（地址相同） 
+System.out.println(s1.equals(s2)); // ✅ true：内容也一样
+```
+
+- 字符串字面量 `"hello"` 是**保存在 JVM 常量池中的单例对象**。
+- [[常量池|什么是常量池]]
+    
+- 所以当你用 `"hello"` 字面量赋值多个变量时，它们实际指向的是同一个内存地址。
+#### 四、自定义类中如何实现内容比较
+
+```java
+class Person {
+    String name;
+
+    Person(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Person) {
+            Person p = (Person) obj;
+            return this.name.equals(p.name);
+        }
+        return false;
+    }
+}
+```
+
+- 如果你不重写 `equals()`，它就只会比较两个对象地址是否一样；
+    
+- 重写后可以实现“内容比较”逻辑。
 ### # hashcode和equals方法有什么关系？
 
 在 Java 中，对于重写 `equals` 方法的类，通常也需要重写 `hashCode` 方法，并且需要遵循以下规定：
@@ -1275,8 +1279,9 @@ finally块中的return语句会覆盖try块中的return返回，因此，该语�
   * **非一致性** ：如果两个对象的 `hashCode` 值相同，它们使用 `equals` 方法比较的结果不一定为 `true`。即 `obj1.hashCode() == obj2.hashCode()` 时，`obj1.equals(obj2)` 可能为 `false`，这种情况称为哈希冲突。
 
 `hashCode` 和 `equals` 方法是紧密相关的，重写 `equals` 方法时必须重写 `hashCode`
-方法，以保证在使用哈希表等数据结构时，对象的相等性判断和存储查找操作能够正常工作。而重写 `hashCode`
-方法时，需要确保相等的对象具有相同的哈希码，但相同哈希码的对象不一定相等。
+方法，以保证在使用哈希表等数据结构时，对象的相等性判断和存储查找操作能够正常工作。而重写 `hashCode`方法时，需要确保相等的对象具有相同的哈希码，但相同哈希码的对象不一定相等。
+
+[[hashCode|关于hashCode]]
 
 ### # String、StringBuffer、StringBuilder的区别和联系
 
@@ -1305,8 +1310,7 @@ finally块中的return语句会覆盖try块中的return返回，因此，该语�
   
 例子代码如下：
 
-    
-    
+```java
     // String的不可变性
     String str = "abc";
     str = str + "def"; // 新建对象，str指向新对象
@@ -1318,7 +1322,7 @@ finally块中的return语句会覆盖try块中的return返回，因此，该语�
     // StringBuffer（多线程安全）
     StringBuffer sbf = new StringBuffer();
     sbf.append("abc").append("def"); // 同步方法保证线程安全
-    
+```
 
 ## # Java 新特性
 
@@ -1326,25 +1330,19 @@ finally块中的return语句会覆盖try块中的return返回，因此，该语�
 
 下面是 Java 8 主要新特性的整理表格，包含关键改进和示例说明：
 
-**特性名称** | **描述** | **示例或说明**  
----|---|---  
-**Lambda 表达式** | 简化匿名内部类，支持函数式编程 | `(a, b) -> a + b` 代替匿名类实现接口  
-**函数式接口** | 仅含一个抽象方法的接口，可用 `@FunctionalInterface` 注解标记 | `Runnable`,
-`Comparator`, 或自定义接口 `@FunctionalInterface interface MyFunc { void run(); }`  
-**Stream API** | 提供链式操作处理集合数据，支持并行处理 | `list.stream().filter(x -> x >
-0).collect(Collectors.toList())`  
-**Optional 类** | 封装可能为 `null` 的对象，减少空指针异常 |
-`Optional.ofNullable(value).orElse("default")`  
-**方法引用** | 简化 Lambda 表达式，直接引用现有方法 | `System.out::println` 等价于 `x ->
-System.out.println(x)`  
-**接口的默认方法与静态方法** | 接口可定义默认实现和静态方法，增强扩展性 | `interface A { default void print()
-{ System.out.println("默认方法"); } }`  
-**并行数组排序** | 使用多线程加速数组排序 | `Arrays.parallelSort(array)`  
-**重复注解** | 允许同一位置多次使用相同注解 | `@Repeatable` 注解配合容器注解使用  
-**类型注解** | 注解可应用于更多位置（如泛型、异常等） | `List<@NonNull String> list`  
-**CompletableFuture** | 增强异步编程能力，支持链式调用和组合操作 |
-`CompletableFuture.supplyAsync(() ->
-"result").thenAccept(System.out::println)`  
+|**特性名称**|**描述**|**示例或说明**|
+|---|---|---|
+|**Lambda 表达式**|简化匿名内部类写法，支持函数式编程|`(a, b) -> a + b` 代替匿名类实现接口|
+|**函数式接口**|只包含一个抽象方法的接口，可使用 `@FunctionalInterface` 注解标记|如 `Runnable`、`Comparator`，或自定义接口：  <br>`@FunctionalInterface interface MyFunc { void run(); }`|
+|**Stream API**|提供流式操作集合数据的能力，支持链式调用与并行处理|`list.stream().filter(x -> x > 0).collect(Collectors.toList())`|
+|**Optional 类**|封装可能为 `null` 的值，避免空指针异常|`Optional.ofNullable(value).orElse("default")`|
+|**方法引用**|简化 Lambda 表达式，直接引用已有方法|`System.out::println` 等价于 `x -> System.out.println(x)`|
+|**接口的默认方法与静态方法**|接口中可定义带有实现的方法，增强接口的扩展性|`interface A { default void print() { System.out.println("默认方法"); } }`|
+|**并行数组排序**|使用多线程加速数组排序，实现更快性能|`Arrays.parallelSort(array)`|
+|**重复注解**|同一位置允许多次使用相同注解|使用 `@Repeatable` 注解及其容器注解定义多个相同注解|
+|**类型注解**|注解可应用于更多语法位置（如泛型参数、异常声明等）|`List<@NonNull String> list`|
+|**CompletableFuture**|支持异步编程的类，提供链式操作与组合任务能力|`CompletableFuture.supplyAsync(() -> "result").thenAccept(System.out::println)`|
+
   
 ### # Lambda 表达式了解吗？
 
@@ -1355,8 +1353,7 @@ Lambda 表达式它是一种简洁的语法，用于创建匿名函数，主要�
 
 传统的匿名内部类实现方式代码较为冗长，而 Lambda 表达式可以用更简洁的语法实现相同的功能。比如，使用匿名内部类实现 `Runnable` 接口
 
-    
-    
+```java
     public class AnonymousClassExample {
         public static void main(String[] args) {
             Thread t1 = new Thread(new Runnable() {
@@ -1368,26 +1365,24 @@ Lambda 表达式它是一种简洁的语法，用于创建匿名函数，主要�
             t1.start();
         }
     }
-    
+```
 
 使用 Lambda 表达式实现相同功能：
 
-    
-    
+```java
     public class LambdaExample {
         public static void main(String[] args) {
             Thread t1 = new Thread(() -> System.out.println("Running using lambda expression"));
             t1.start();
         }
     }
-    
+```
 
 可以看到，Lambda 表达式的代码更加简洁明了。
 
 还有，Lambda 表达式能够更清晰地表达代码的意图，尤其是在处理集合操作时，如过滤、映射等。比如，过滤出列表中所有偶数
 
-    
-    
+```java
     import java.util.Arrays;
     import java.util.List;
     import java.util.stream.Collectors;
@@ -1402,15 +1397,14 @@ Lambda 表达式它是一种简洁的语法，用于创建匿名函数，主要�
             System.out.println(evenNumbers);
         }
     }
-    
+```
 
 通过 Lambda 表达式，代码的逻辑更加直观，易于理解。
 
 还有，Lambda 表达式使得 Java 支持函数式编程范式，允许将函数作为参数传递，从而可以编写更灵活、可复用的代码。比如定义一个通用的计算函数。
 
-    
-    
-    interface Calculator {
+```java
+  interface Calculator {
         int calculate(int a, int b);
     }
     
@@ -1429,7 +1423,7 @@ Lambda 表达式它是一种简洁的语法，用于创建匿名函数，主要�
             System.out.println("Product: " + product);
         }
     }
-    
+```
 
 虽然 Lambda 表达式优点蛮多的，不过也有一些缺点，比如会增加调试困难，因为 Lambda 表达式是匿名的，在调试时很难定位具体是哪个 Lambda
 表达式出现了问题。尤其是当 Lambda 表达式嵌套使用或者比较复杂时，调试难度会进一步增加。
@@ -1446,8 +1440,7 @@ API带来的便利，对比在Stream API引入之前的传统做法。
 
 **没有Stream API的做法** ：
 
-    
-    
+```java
     List<String> originalList = Arrays.asList("apple", "fig", "banana", "kiwi");
     List<String> filteredList = new ArrayList<>();
     
@@ -1456,19 +1449,18 @@ API带来的便利，对比在Stream API引入之前的传统做法。
             filteredList.add(item);
         }
     }
-    
+```
 
 这段代码需要显式地创建一个新的ArrayList，并通过循环遍历原列表，手动检查每个元素是否满足条件，然后添加到新列表中。
 
 **使用Stream API的做法** ：
 
-    
-    
+```java
     List<String> originalList = Arrays.asList("apple", "fig", "banana", "kiwi");
     List<String> filteredList = originalList.stream()
                                             .filter(s -> s.length() > 3)
                                             .collect(Collectors.toList());
-    
+```
 
 这里，我们直接在原始列表上调用`.stream()`方法创建了一个流，使用`.filter()`中间操作筛选出长度大于3的字符串，最后使用`.collect(Collectors.toList())`终端操作将结果收集到一个新的列表中。代码更加简洁明了，逻辑一目了然。
 
@@ -1478,29 +1470,26 @@ API带来的便利，对比在Stream API引入之前的传统做法。
 
 **没有Stream API的做法** ：
 
-    
-    
+```java
     List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
     int sum = 0;
     for (Integer number : numbers) {
         sum += number;
     }
-    
+```
 
 这个传统的for-each循环遍历列表中的每一个元素，累加它们的值来计算总和。
 
 **使用Stream API的做法** ：
 
-    
-    
+```java
     List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
     int sum = numbers.stream()
                      .mapToInt(Integer::intValue)
                      .sum();
-    
+```
 
-通过Stream
-API，我们可以先使用`.mapToInt()`将Integer流转换为IntStream（这是为了高效处理基本类型），然后直接调用`.sum()`方法来计算总和，极大地简化了代码。
+通过StreamAPI，我们可以先使用`.mapToInt()`将Integer流转换为IntStream（这是为了高效处理基本类型），然后直接调用`.sum()`方法来计算总和，极大地简化了代码。
 
 ### # Stream流的并行API是什么？
 
@@ -1795,8 +1784,7 @@ Reactor 实现相对简单，适合处理耗时短的场景，对于耗时长的
 
 可以使用Comparable接口来实现按照分数排序，再按照学号排序。首先在学生类中实现Comparable接口，并重写compareTo方法，然后在compareTo方法中实现按照分数排序和按照学号排序的逻辑。
 
-    
-    
+```java
     public class Student implements Comparable<Student> {
         private int id;
         private int score;
@@ -1812,16 +1800,15 @@ Reactor 实现相对简单，适合处理耗时短的场景，对于耗时长的
             }
         }
     }
-    
+```
 
 然后在需要对学生列表进行排序的地方，使用Collections.sort()方法对学生列表进行排序即可：
 
-    
-    
+```java
     List<Student> students = new ArrayList<>();
     // 添加学生对象到列表中
     Collections.sort(students);
-    
+```
 
 ### # Native方法解释一下
 
@@ -1829,12 +1816,11 @@ Reactor 实现相对简单，适合处理耗时短的场景，对于耗时长的
 
 在Java类中，native方法看起来与其他方法相似，只是其方法体由native关键字代替，没有实际的实现代码。例如：
 
-    
-    
+```java
     public class NativeExample {
         public native void nativeMethod();
     }
-    
+```
 
 要实现native方法，你需要完成以下步骤：
 

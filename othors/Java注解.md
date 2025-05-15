@@ -85,7 +85,10 @@ public class User {
 注解使用 `@` 符号开头，位于类、方法、字段等前面：
 
 ```java
-@Override public String toString() {     return "Example"; }
+@Override 
+public String toString() {     
+	return "Example"; 
+	}
 ```
 
 # 常见注解
@@ -163,6 +166,95 @@ public class MyClass {
 }
 ```
 
+
+### 可以做什么
+
+|用途|示例|
+|---|---|
+|自动注入 / 依赖注入|`@Autowired`、`@Inject`|
+|权限控制|`@RequiresPermission`|
+|参数校验|`@NotNull`、`@Size`|
+|ORM 映射|`@Table`、`@Column`|
+|接口映射（Web框架）|`@RequestMapping`|
+|代码生成（注解处理器）|`@AutoService`, `@Builder`|
+|日志埋点 / AOP|`@LogTime`|
+|自定义测试框架|`@Test`, `@Benchmark`|
+### 详细实现（反射 + JDK动态代理）
+
+这里举例：写一个用于类的注解，如果类加上了这个注解，就输出类的运行时长
+
+注解部分：
+```java
+@Target(ElementType.METHOD)  
+@Retention(java.lang.annotation.RetentionPolicy.RUNTIME)  
+public @interface LogExecutionTime {  
+}
+```
+
+使用注解：（注意这里需要是接口和实现，才能做到JDK代理）
+```java
+public interface ServiceInterface {  
+    public void doSomething();  
+  
+    void work() throws InterruptedException;  
+}
+
+public class DemoService implements ServiceInterface{  
+    @Override  
+    @LogExecutionTime    
+    public void doSomething() {  
+        System.out.println("doSomething");  
+    }  
+  
+    
+    @Override
+    @LogExecutionTime  
+	public void work() throws InterruptedException {  
+        sleep(1000);  
+        System.out.println("work over");  
+    }  
+}
+```
+
+代理类：
+```java
+public class LogProxy {  
+    @SuppressWarnings("unchecked")  
+    public static <T> T createProxy(T target) {  
+        return (T) Proxy.newProxyInstance(  
+                target.getClass().getClassLoader(),  
+                target.getClass().getInterfaces(),  
+                new InvocationHandler() {  
+                    @Override  
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {  
+                        Method realMethod = target.getClass().getMethod(method.getName(), method.getParameterTypes());  
+  
+                        if (realMethod.isAnnotationPresent(LogExecutionTime.class)) {  
+                            long start = System.currentTimeMillis();  
+                            System.out.println("开始执行方法: " + method.getName());  
+                            Object result = method.invoke(target, args);  
+                            long end = System.currentTimeMillis();  
+                            System.out.println("方法执行结果: " + result);  
+                            System.out.println("方法执行耗时: " + (end - start) + " ms");  
+                            return result;  
+                        } else {  
+                            return method.invoke(target, args);  
+                        }  
+                    }
+```
+
+调用方法：
+```java
+@Test  
+public void test9() throws Exception {  
+    DemoService service = new DemoService();  
+    ServiceInterface proxy = LogProxy.createProxy(service);  //注意这里要返回到接口，不能是实现类，而且一定要用代理类包一层
+  
+    proxy.doSomething();  
+    proxy.work();  
+}
+```
+
 ---
 
 ## 常见第三方注解（框架中常见）
@@ -220,4 +312,6 @@ if (clazz.isAnnotationPresent(Author.class)) {
     
 
 ---
+[[2 Java基础面试题#注解|小林coding注解部分]]
+
 

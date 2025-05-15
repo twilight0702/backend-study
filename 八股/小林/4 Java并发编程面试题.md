@@ -6,8 +6,7 @@
 
 ### # java里面的线程和操作系统的线程一样吗？
 
-Java 底层会调用 pthread_create 来创建线程，所以本质上 java 程序创建的线程，就是和操作系统线程是一样的，是 1 对 1
-的线程模型。
+Java 底层会调用 pthread_create 来创建线程，所以本质上 java 程序创建的线程，就是和操作系统线程是一样的，是 1 对 1的线程模型。
 
 ![image-20240725230425385](https://cdn.xiaolincoding.com//picgo/image-20240725230425385.png)
 
@@ -25,7 +24,7 @@ Java的线程安全在三个方面体现：
 
   * **事务管理** ：使用数据库事务来确保一组数据库操作要么全部成功提交，要么全部失败回滚。通过ACID（原子性、一致性、隔离性、持久性）属性，数据库事务可以保证数据的一致性。
   * **锁机制** ：使用锁来实现对共享资源的互斥访问。在 Java 中，可以使用 synchronized 关键字、ReentrantLock 或其他锁机制来控制并发访问，从而避免并发操作导致数据不一致。
-  * **版本控制** ：通过乐观锁的方式，在更新数据时记录数据的版本信息，从而避免同时对同一数据进行修改，进而保证数据的一致性。
+  * **版本控制** ：通过乐观锁的方式，在更新数据时记录数据的版本信息，从而避免同时对同一数据进行修改，进而保证数据的一致性。在多线程或分布式系统中，通过维护一个“版本号”字段，在每次数据修改时判断该版本号是否与读取时一致，如果不一致则拒绝更新，从而防止多个线程同时修改同一条数据导致的数据冲突和覆盖。
 
 ### # 线程的创建方式有哪些?
 
@@ -33,8 +32,7 @@ Java的线程安全在三个方面体现：
 
 这是最直接的一种方式，用户自定义类继承java.lang.Thread类，重写其run()方法，run()方法中定义了线程执行的具体任务。创建该类的实例后，通过调用start()方法启动线程。
 
-    
-    
+```java
     class MyThread extends Thread {
         @Override
         public void run() {
@@ -46,7 +44,7 @@ Java的线程安全在三个方面体现：
         MyThread t = new MyThread();
         t.start();
     }
-    
+```
 
 采用继承Thread类方式
 
@@ -57,8 +55,7 @@ Java的线程安全在三个方面体现：
 
 如果一个类已经继承了其他类，就不能再继承Thread类，此时可以实现java.lang.Runnable接口。实现Runnable接口需要重写run()方法，然后将此Runnable对象作为参数传递给Thread类的构造器，创建Thread对象后调用其start()方法启动线程。
 
-    
-    
+```java
     class MyRunnable implements Runnable {
         @Override
         public void run() {
@@ -70,7 +67,7 @@ Java的线程安全在三个方面体现：
         Thread t = new Thread(new MyRunnable());
         t.start();
     }
-    
+```
 
 采用实现Runnable接口方式：
 
@@ -78,12 +75,10 @@ Java的线程安全在三个方面体现：
   * 缺点：编程稍微复杂，如果需要访问当前线程，必须使用Thread.currentThread()方法。
 
 >   3. 实现Callable接口与FutureTask
->
 
 java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方法可以有返回值并且可以抛出异常。要执行Callable任务，需将它包装进一个FutureTask，因为Thread类的构造器只接受Runnable参数，而FutureTask实现了Runnable接口。
 
-    
-    
+```java
     class MyCallable implements Callable<Integer> {
         @Override
         public Integer call() throws Exception {
@@ -105,7 +100,7 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
             e.printStackTrace();
         }
     }
-    
+```
 
 采用实现Callable接口方式：
 
@@ -115,11 +110,9 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
 >   4. 使用线程池（Executor框架）
 >
 
-从Java
-5开始引入的java.util.concurrent.ExecutorService和相关类提供了线程池的支持，这是一种更高效的线程管理方式，避免了频繁创建和销毁线程的开销。可以通过Executors类的静态方法创建不同类型的线程池。
+从Java5开始引入的java.util.concurrent.ExecutorService和相关类提供了线程池的支持，这是一种更高效的线程管理方式，避免了频繁创建和销毁线程的开销。可以通过Executors类的静态方法创建不同类型的线程池。
 
-    
-    
+```java
     class Task implements Runnable {
         @Override
         public void run() {
@@ -134,7 +127,7 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
         }
         executor.shutdown();  // 关闭线程池
     }
-    
+```
 
 采用线程池方式：
 
@@ -145,14 +138,13 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
 
 启动线程的通过Thread类的 **start()** 。
 
-    
-    
+```java
     //创建两个线程，用start启动线程
     MyThread myThread1 = new MyThread();  
     MyThread myThread2 = new MyThread();  
     myThread1.start();  
     myThread2.start();  
-    
+```
 
 ### # 如何停止一个线程的运行?
 
@@ -162,6 +154,7 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
   * **在沉睡中停止** ：先将线程sleep，然后调用interrupt标记中断状态，interrupt会将阻塞状态的线程中断。会抛出中断异常，达到停止线程的效果
   * **stop()暴力停止** ：线程调用stop()方法会被暴力停止，方法已弃用，该方法会有不好的后果：强制让线程停止有可能使一些请理性的工作得不到完成。
   * **使用return停止线程** ：调用interrupt标记为中断状态后，在run方法中判断当前线程状态，如果为中断状态则return，能达到停止线程的效果。
+[[停止线程的运行]]
 
 ### # 调用 interrupt 是如何让线程抛出异常的?
 
@@ -174,29 +167,28 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
 
 ![img](https://cdn.xiaolincoding.com//picgo/1712648206670-824228d1-be28-449d-8509-fd4df4ff63d3.webp)
 
-源自《Java并发编程艺术》 java.lang.Thread.State枚举类中定义了六种线程的状态，可以调用线程Thread中的getState()方法
-**获取当前线程的状态** 。
+源自《Java并发编程艺术》 java.lang.Thread.State枚举类中定义了六种线程的状态，可以调用线程Thread中的getState()方法**获取当前线程的状态** 。
 
-线程状态 | 解释  
----|---  
-NEW | 尚未启动的线程状态，即线程创建， **还未调用start方法**  
-RUNNABLE | **就绪状态** （调用start，等待调度）+ **正在运行**  
-BLOCKED | **等待监视器锁** 时，陷入阻塞状态  
-WAITING | 等待状态的线程正在 **等待** 另一线程执行特定的操作（如notify）  
-TIMED_WAITING | 具有 **指定等待时间** 的等待状态  
-TERMINATED | 线程完成执行， **终止状态**  
+| 线程状态          | 解释                                        |
+| ------------- | ----------------------------------------- |
+| NEW           | 尚未启动的线程状态，即线程创建， **还未调用start方法**          |
+| RUNNABLE      | **就绪状态** （调用start，等待调度）+ **正在运行**         |
+| BLOCKED       | **等待监视器锁** 时，陷入阻塞状态。是同步机制引起的等待状态，通常是等待锁资源 |
+| WAITING       | 等待状态的线程正在 **等待** 另一线程执行特定的操作（如notify）     |
+| TIMED_WAITING | 具有 **指定等待时间** 的等待状态                       |
+| TERMINATED    | 线程完成执行， **终止状态**                          |
   
 ### # sleep 和 wait的区别是什么？
 
 对比例表：
 
-**特性** | `sleep()` | `wait()`  
----|---|---  
-所属类 | `Thread` 类（静态方法） | `Object` 类（实例方法）  
-锁释放 | ❌ | ✅  
-使用前提 | 任意位置调用 | 必须在同步块内（持有锁）  
-唤醒机制 | 超时自动恢复 | 需 `notify()`/`notifyAll()` 或超时  
-设计用途 | 暂停线程执行，不涉及锁协作 | 线程间协调，释放锁让其他线程工作  
+| **特性** | `sleep()`        | `wait()`                       |
+| ------ | ---------------- | ------------------------------ |
+| 所属类    | `Thread` 类（静态方法） | `Object` 类（实例方法）               |
+| 锁释放    | ❌                | ✅                              |
+| 使用前提   | 任意位置调用           | 必须在同步块内（持有锁）                   |
+| 唤醒机制   | 超时自动恢复           | 需 `notify()`/`notifyAll()` 或超时 |
+| 设计用途   | 暂停线程执行，不涉及锁协作    | 线程间协调，释放锁让其他线程工作               |
   
   * **所属分类的不同** ：sleep 是 `Thread` 类的静态方法，可以在任何地方直接通过 `Thread.sleep()` 调用，无需依赖对象实例。wait 是 `Object` 类的实例方法，这意味着必须通过对象实例来调用。
   * **锁释放的情况** ：`Thread.sleep()` 在调用时，线程会暂停执行指定的时间，但不会释放持有的对象锁。也就是说，在 `sleep` 期间，其他线程无法获得该线程持有的锁。`Object.wait()`：调用该方法时，线程会释放持有的对象锁，进入等待状态，直到其他线程调用相同对象的 `notify()` 或 `notifyAll()` 方法唤醒它
@@ -207,11 +199,9 @@ TERMINATED | 线程完成执行， **终止状态**
 
 是的，调用 `Thread.sleep()` 时，线程会释放 CPU，但不会释放持有的锁。
 
-**当线程调用** `sleep()` **后，会主动让出 CPU 时间片** ，进入 `TIMED_WAITING` 状态。此时操作系统会触发调度，将
-CPU 分配给其他处于就绪状态的线程。这样其他线程（无论是需要同一锁的线程还是不相关线程）便有机会执行。
+**当线程调用** `sleep()` **后，会主动让出 CPU 时间片** ，进入 `TIMED_WAITING` 状态。此时操作系统会触发调度，将CPU 分配给其他处于就绪状态的线程。这样其他线程（无论是需要同一锁的线程还是不相关线程）便有机会执行。
 
-`sleep()` 不会释放线程已持有的任何锁（如 `synchronized`
-同步代码块或方法中获取的锁）。因此，如果有其他线程试图获取同一把锁，它们仍会被阻塞，直到原线程退出同步代码块。
+`sleep()` 不会释放线程已持有的任何锁（如 `synchronized`同步代码块或方法中获取的锁）。因此，如果有其他线程试图获取同一把锁，它们仍会被阻塞，直到原线程退出同步代码块。
 
 ### # blocked和waiting有啥区别
 
@@ -233,8 +223,7 @@ CPU 分配给其他处于就绪状态的线程。这样其他线程（无论是�
 线程从 `等待（WAIT）` 状态恢复到 `运行（RUNNING）` 状态的核心机制是 **通过外部事件触发或资源可用性变化** ，比如等待的线程
 **被其他线程对象唤醒** ，`notify()`和`notifyAll()`。
 
-    
-    
+```java
     synchronized (lock) {
         // 线程进入等待状态，释放锁
         lock.wait(); 
@@ -245,8 +234,7 @@ CPU 分配给其他处于就绪状态的线程。这样其他线程（无论是�
         lock.notify();      // 唤醒单个线程
         // lock.notifyAll(); // 唤醒所有等待线程
     }
-    
-
+```
 ### # notify 和 notifyAll 的区别?
 
 同样是唤醒等待的线程，同样最多只有一个线程能获得锁，同样不能控制哪个线程获得锁。
@@ -311,8 +299,7 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
 方法使当前线程进入等待状态，`notify()` 方法唤醒在此对象监视器上等待的单个线程，`notifyAll()`
 方法唤醒在此对象监视器上等待的所有线程。
 
-    
-    
+```java
     class WaitNotifyExample {
         private static final Object lock = new Object();
     
@@ -350,7 +337,7 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             producer.start();
         }
     }
-    
+```
 
 代码解释：
 
@@ -842,7 +829,7 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
 
 ### # 怎么保证多线程安全？
 
-  * **synchronized关键字** :可以使用`synchronized`关键字来同步代码块或方法，确保同一时刻只有一个线程可以访问这些代码。对象锁是通过`synchronized`关键字锁定对象的监视器（monitor）来实现的。
+**synchronized关键字** :可以使用`synchronized`关键字来同步代码块或方法，确保同一时刻只有一个线程可以访问这些代码。对象锁是通过`synchronized`关键字锁定对象的监视器（monitor）来实现的。
 
     
     
@@ -855,14 +842,14 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
     }
     
 
-  * **volatile关键字** :`volatile`关键字用于变量，确保所有线程看到的是该变量的最新值，而不是可能存储在本地寄存器中的副本。
+**volatile关键字** :`volatile`关键字用于变量，确保所有线程看到的是该变量的最新值，而不是可能存储在本地寄存器中的副本。
 
     
     
     public volatile int sharedVariable;
     
 
-  * **Lock接口和ReentrantLock类** :`java.util.concurrent.locks.Lock`接口提供了比`synchronized`更强大的锁定机制，`ReentrantLock`是一个实现该接口的例子，提供了更灵活的锁管理和更高的性能。
+**Lock接口和ReentrantLock类** :`java.util.concurrent.locks.Lock`接口提供了比`synchronized`更强大的锁定机制，`ReentrantLock`是一个实现该接口的例子，提供了更灵活的锁管理和更高的性能。
 
     
     
@@ -878,7 +865,7 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
     }
     
 
-  * **原子类** ：Java并发库（`java.util.concurrent.atomic`）提供了原子类，如`AtomicInteger`、`AtomicLong`等，这些类提供了原子操作，可以用于更新基本类型的变量而无需额外的同步。
+**原子类** ：Java并发库（`java.util.concurrent.atomic`）提供了原子类，如`AtomicInteger`、`AtomicLong`等，这些类提供了原子操作，可以用于更新基本类型的变量而无需额外的同步。
 
 示例：
 
@@ -889,7 +876,7 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
     int newValue = counter.incrementAndGet();
     
 
-  * **线程局部变量** :`ThreadLocal`类可以为每个线程提供独立的变量副本，这样每个线程都拥有自己的变量，消除了竞争条件。
+**线程局部变量** :`ThreadLocal`类可以为每个线程提供独立的变量副本，这样每个线程都拥有自己的变量，消除了竞争条件。
 
     
     
@@ -899,8 +886,8 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
     int value = threadLocalVar.get();
     
 
-  * **并发集合** :使用`java.util.concurrent`包中的线程安全集合，如`ConcurrentHashMap`、`ConcurrentLinkedQueue`等，这些集合内部已经实现了线程安全的逻辑。
-  * **JUC工具类** : 使用`java.util.concurrent`包中的一些工具类可以用于控制线程间的同步和协作。例如：`Semaphore`和`CyclicBarrier`等。
+**并发集合** :使用`java.util.concurrent`包中的线程安全集合，如`ConcurrentHashMap`、`ConcurrentLinkedQueue`等，这些集合内部已经实现了线程安全的逻辑。
+**JUC工具类** : 使用`java.util.concurrent`包中的一些工具类可以用于控制线程间的同步和协作。例如：`Semaphore`和`CyclicBarrier`等。
 
 ### # Java中有哪些常用的锁，在什么场景下使用？
 
