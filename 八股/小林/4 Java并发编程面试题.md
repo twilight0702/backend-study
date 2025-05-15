@@ -215,8 +215,8 @@ java.util.concurrent.Callable接口类似于Runnable，但Callable的call()方�
 
 所以，BLOCKED和WAITING两个状态最大的区别有两个：
 
-  * BLOCKED是锁竞争失败后被被动触发的状态，WAITING是人为的主动触发的状态
-  * BLCKED的唤醒时自动触发的，而WAITING状态是必须要通过特定的方法来主动唤醒
+  * <span style="background:rgba(240, 200, 0, 0.2)">BLOCKED是锁竞争失败后被被动触发的状态，WAITING是人为的主动触发的状态</span>
+  * <span style="background:rgba(240, 200, 0, 0.2)">BLCKED的唤醒时自动触发的，而WAITING状态是必须要通过特定的方法来主动唤醒</span>
 
 ### # wait 状态下的线程如何进行恢复到 running 状态?
 
@@ -254,11 +254,13 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
 
 ### # 不同的线程之间如何通信？
 
-共享变量是最基本的线程间通信方式。多个线程可以访问和修改同一个共享变量，从而实现信息的传递。为了保证线程安全，通常需要使用 `synchronized`
-关键字或 `volatile` 关键字。
+#### 1. 共享变量
 
-    
-    
+共享变量是最基本的线程间通信方式。多个线程可以访问和修改同一个共享变量，从而实现信息的传递。为了保证线程安全，通常需要使用 `synchronized`关键字或 `volatile` 关键字。
+
+[[volatile关键字]]
+
+```java
     class SharedVariableExample {
         // 使用 volatile 关键字保证变量的可见性
         private static volatile boolean flag = false;
@@ -288,16 +290,17 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             consumer.start();
         }
     }
-    
+```
 
 代码解释
 
   * `volatile` 关键字确保了 `flag` 变量在多个线程之间的可见性，即一个线程修改了 `flag` 的值，其他线程能立即看到。
   * 生产者线程在睡眠 2 秒后将 `flag` 设置为 `true`，消费者线程在 `flag` 为 `false` 时一直等待，直到 `flag` 变为 `true` 才继续执行。
 
+#### 2. wait和notify
+
 `Object` 类中的 `wait()`、`notify()` 和 `notifyAll()` 方法可以用于线程间的协作。`wait()`
-方法使当前线程进入等待状态，`notify()` 方法唤醒在此对象监视器上等待的单个线程，`notifyAll()`
-方法唤醒在此对象监视器上等待的所有线程。
+方法使当前线程进入等待状态，`notify()` 方法唤醒在此对象监视器上等待的单个线程，`notifyAll()`方法唤醒在此对象监视器上等待的所有线程。
 
 ```java
     class WaitNotifyExample {
@@ -344,12 +347,13 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
   * `lock` 是一个用于同步的对象，生产者和消费者线程都需要获取该对象的锁才能执行相应的操作。
   * 消费者线程调用 `lock.wait()` 方法进入等待状态，释放锁；生产者线程执行完生产任务后调用 `lock.notify()` 方法唤醒等待的消费者线程。
 
+#### 3. lock和condition
+
 `java.util.concurrent.locks` 包中的 `Lock` 和 `Condition` 接口提供了比 `synchronized`
 更灵活的线程间通信方式。`Condition` 接口的 `await()` 方法类似于 `wait()` 方法，`signal()` 方法类似于
 `notify()` 方法，`signalAll()` 方法类似于 `notifyAll()` 方法。
 
-    
-    
+```java
     import java.util.concurrent.locks.Condition;
     import java.util.concurrent.locks.Lock;
     import java.util.concurrent.locks.ReentrantLock;
@@ -394,19 +398,18 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             producer.start();
         }
     }
-    
+```
 
 代码解释：
 
   * `ReentrantLock` 是 `Lock` 接口的一个实现类，`condition` 是通过 `lock.newCondition()` 方法创建的。
   * 消费者线程调用 `condition.await()` 方法进入等待状态，生产者线程执行完生产任务后调用 `condition.signal()` 方法唤醒等待的消费者线程。
+#### 4. BlockingQueue
 
-`java.util.concurrent` 包中的 `BlockingQueue`
-接口提供了线程安全的队列操作，当队列满时，插入元素的线程会被阻塞；当队列为空时，获取元素的线程会被阻塞。
+`java.util.concurrent` 包中的 `BlockingQueue`接口提供了线程安全的队列操作，当队列满时，插入元素的线程会被阻塞；当队列为空时，获取元素的线程会被阻塞。[[阻塞|关于阻塞]]
 
-    
-    
-    import java.util.concurrent.BlockingQueue;
+```java
+ import java.util.concurrent.BlockingQueue;
     import java.util.concurrent.LinkedBlockingQueue;
     
     class BlockingQueueExample {
@@ -439,109 +442,22 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             producer.start();
         }
     }
-    
+```
 
 代码解释：
 
   * `LinkedBlockingQueue` 是 `BlockingQueue` 接口的一个实现类，容量为 1。
   * 生产者线程调用 `queue.put(1)` 方法将元素插入队列，如果队列已满，线程会被阻塞；消费者线程调用 `queue.take()` 方法从队列中取出元素，如果队列为空，线程会被阻塞。
 
-### # 线程间通信方式有哪些？
+#### 5. CountDownLatch。
 
-1、Object 类的 wait()、notify() 和 notifyAll() 方法。这是 Java
-中最基础的线程间通信方式，基于对象的监视器（锁）机制。
-
-  * `wait()`：使当前线程进入等待状态，直到其他线程调用该对象的 `notify()` 或 `notifyAll()` 方法。
-  * `notify()`：唤醒在此对象监视器上等待的单个线程。
-  * `notifyAll()`：唤醒在此对象监视器上等待的所有线程。
-
-    
-    
-    class SharedObject {
-        public synchronized void consumerMethod() throws InterruptedException {
-            while (/* 条件不满足 */) {
-                wait();
-            }
-            // 执行相应操作
-        }
-    
-        public synchronized void producerMethod() {
-            // 执行相应操作
-            notify(); // 或者 notifyAll()
-        }
-    }
-    
-
-2、`Lock` 和 `Condition` 接口。`Lock` 接口提供了比 `synchronized` 更灵活的锁机制，`Condition`
-接口则配合 `Lock` 实现线程间的等待 / 通知机制。
-
-  * `await()`：使当前线程进入等待状态，直到被其他线程唤醒。
-  * `signal()`：唤醒一个等待在该 `Condition` 上的线程。
-  * `signalAll()`：唤醒所有等待在该 `Condition` 上的线程。
-
-    
-    
-    import java.util.concurrent.locks.Condition;
-    import java.util.concurrent.locks.Lock;
-    import java.util.concurrent.locks.ReentrantLock;
-    
-    class SharedResource {
-        private final Lock lock = new ReentrantLock();
-        private final Condition condition = lock.newCondition();
-    
-        public void consumer() throws InterruptedException {
-            lock.lock();
-            try {
-                while (/* 条件不满足 */) {
-                    condition.await();
-                }
-                // 执行相应操作
-            } finally {
-                lock.unlock();
-            }
-        }
-    
-        public void producer() {
-            lock.lock();
-            try {
-                // 执行相应操作
-                condition.signal(); // 或者 signalAll()
-            } finally {
-                lock.unlock();
-            }
-        }
-    }
-    
-
-3、`volatile` 关键字。`volatile` 关键字用于保证变量的可见性，即当一个变量被声明为 `volatile`
-时，它会保证对该变量的写操作会立即刷新到主内存中，而读操作会从主内存中读取最新的值。
-
-    
-    
-    class VolatileExample {
-        private volatile boolean flag = false;
-    
-        public void writer() {
-            flag = true;
-        }
-    
-        public void reader() {
-            while (!flag) {
-                // 等待
-            }
-            // 执行相应操作
-        }
-    }
-    
-
-4、CountDownLatch。`CountDownLatch` 是一个同步辅助类，它允许一个或多个线程等待其他线程完成操作。
+`CountDownLatch` 是一个同步辅助类，它允许一个或多个线程等待其他线程完成操作。
 
   * `CountDownLatch(int count)`：构造函数，指定需要等待的线程数量。
   * `countDown()`：减少计数器的值。
   * `await()`：使当前线程等待，直到计数器的值为 0。
 
-    
-    
+```java
     import java.util.concurrent.CountDownLatch;
     
     public class CountDownLatchExample {
@@ -564,16 +480,17 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             System.out.println("所有线程任务完成");
         }
     }
-    
+```
 
-5、CyclicBarrier。`CyclicBarrier` 是一个同步辅助类，它允许一组线程相互等待，直到所有线程都到达某个公共屏障点。
+#### 6. CyclicBarrier
+
+`CyclicBarrier` 是一个同步辅助类，它允许一组线程相互等待，直到所有线程都到达某个公共屏障点。
 
   * `CyclicBarrier(int parties, Runnable barrierAction)`：构造函数，指定参与的线程数量和所有线程到达屏障点后要执行的操作。
   * `await()`：使当前线程等待，直到所有线程都到达屏障点。
 
-    
-    
-    import java.util.concurrent.CyclicBarrier;
+```java
+   import java.util.concurrent.CyclicBarrier;
     
     public class CyclicBarrierExample {
         public static void main(String[] args) {
@@ -596,17 +513,18 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             }
         }
     }
-    
+```
 
-6、Semaphore。`Semaphore` 是一个计数信号量，它可以控制同时访问特定资源的线程数量。
+#### 7. Semaphore。
+
+`Semaphore` 是一个计数信号量，它可以控制同时访问特定资源的线程数量。
 
   * `Semaphore(int permits)`：构造函数，指定信号量的初始许可数量。
   * `acquire()`：获取一个许可，如果没有可用许可则阻塞。
   * `release()`：释放一个许可。
 
-    
-    
-    import java.util.concurrent.Semaphore;
+```java
+  import java.util.concurrent.Semaphore;
     
     public class SemaphoreExample {
         public static void main(String[] args) {
@@ -630,7 +548,7 @@ JVM有很多实现，比较流行的就是hotspot，hotspot对notofy()的实现�
             }
         }
     }
-    
+```
 
 ### # 如何停止一个线程？
 

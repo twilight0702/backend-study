@@ -36,6 +36,20 @@
             }
           },
           {
+            "id": "e348fd71b57fc48b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "volatile关键字.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "volatile关键字"
+            }
+          },
+          {
             "id": "7de84cbc20341ac6",
             "type": "leaf",
             "state": {
@@ -213,9 +227,16 @@
   },
   "active": "289c20cd0c33f7aa",
   "lastOpenFiles": [
+    "阻塞.md",
+    "八股/小林/4 Java并发编程面试题.md",
+    "study-java-maven/target/classes/com/Twilight/Day2/WaitNotifyExample.class",
+    "study-java-maven/target/classes/com/Twilight/Day2/LeetCode.class",
+    "study-java-maven/target/classes/com/Twilight/Day2",
+    "study-java-maven/target/classes/com/Twilight",
+    "study-java-maven/target/classes/com",
+    "volatile关键字.md",
     "面试/华为.md",
     "停止线程的运行.md",
-    "八股/小林/4 Java并发编程面试题.md",
     "八股/小林/1.md",
     "study-java-maven/src/main/java/com/Twilight/Day2/LeetCode.java~",
     "八股/小林/17.md",
@@ -238,17 +259,10 @@
     "study-java-maven/src/main/java/com/Twilight/Day2/LeetCode.java",
     "study-java-maven/target/classes/com/Twilight/Day2/Solution.class",
     "study-java-maven/target/classes/com/Twilight/Day2/LeedCode.class",
-    "study-java-maven/target/classes/com/Twilight/Day2",
-    "study-java-maven/target/classes/com/Twilight",
-    "study-java-maven/target/classes/com",
-    "study-java-maven/src/main/java/com/Twilight/Day2",
-    "study-java-maven/src/main/java/com/Twilight",
     "othors/资源目录.md",
     "othors/类加载器.md",
     "othors/Lambda表达式.md",
     "常量池.md",
-    "hashCode.md",
-    "interview/spring.html.md",
     "1746946711942.jpg",
     "1746504188501.jpg",
     "Pasted image 20250505213330.png",
