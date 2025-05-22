@@ -261,8 +261,7 @@ IPv4 地址是一个 32 位的二进制数，通常以点分十进制表示法�
 
 **字符串类型的存储方式** ：直接将 IP 地址作为字符串存储在数据库中，比如可以用 `VARCHAR(15)`来存储。
 
-    
-    
+```mysql
     -- 创建一个表，使用VARCHAR类型存储IPv4地址
     CREATE TABLE ip_records (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -271,15 +270,14 @@ IPv4 地址是一个 32 位的二进制数，通常以点分十进制表示法�
     
     -- 插入数据
     INSERT INTO ip_records (ip_address) VALUES ('192.168.1.1');
-    
+```
 
   * **优点** ：直观易懂，方便直接进行数据的插入、查询和显示，不需要进行额外的转换操作。
   * **缺点** ：占用存储空间较大，字符串比较操作的性能相对较低，不利于进行范围查询。
 
 整数类型的存储方式：将 IPv4 地址转换为 32 位无符号整数进行存储，常用的数据类型有 `INT UNSIGNED`。
 
-    
-    
+```mysql
     -- 创建一个表，使用INT UNSIGNED类型存储IPv4地址
     CREATE TABLE ip_records (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -291,7 +289,7 @@ IPv4 地址是一个 32 位的二进制数，通常以点分十进制表示法�
     
     -- 查询时将整数转换回IP地址
     SELECT INET_NTOA(ip_address) FROM ip_records;
-    
+```
 
   * **优点** ：占用存储空间小，整数比较操作的性能较高，便于进行范围查询。
   * **缺点** ：需要进行额外的转换操作，不够直观，增加了开发的复杂度。
@@ -302,15 +300,14 @@ IPv4 地址是一个 32 位的二进制数，通常以点分十进制表示法�
 
 假设你有两个表，一个是学生表，另一个是课程表，这两个表之间有一个关系，即一个学生可以选修多门课程，而一门课程也可以被多个学生选修。在这种情况下，我们可以在学生表中定义一个指向课程表的外键，如下所示：
 
-    
-    
+```mysql
     CREATE TABLE students (
       id INT PRIMARY KEY,
       name VARCHAR(50),
       course_id INT,
       FOREIGN KEY (course_id) REFERENCES courses(id)
     );
-    
+```
 
 这里，`students`表中的`course_id`字段是一个外键，它指向`courses`表中的`id`字段。这个外键约束确保了每个学生所选的课程在`courses`表中都存在，从而维护了数据的完整性和一致性。
 

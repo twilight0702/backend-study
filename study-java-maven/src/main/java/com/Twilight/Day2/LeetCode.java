@@ -1,53 +1,36 @@
 package com.Twilight.Day2;
 
-import org.w3c.dom.Node;
+import java.math.BigInteger;
+import java.util.*;
 
-import javax.swing.tree.TreeNode;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
-import static java.lang.Math.max;
-
-public class LeetCode {
-
+class Solution {
+    public String simplifyPath(String path) {
+        Stack<String> stack = new Stack<>();
+        String[] paths = path.split("/");
+        for (String s : paths) {
+            if (Objects.equals(s, "..")) {
+                if(!stack.isEmpty()){
+                    stack.pop();
+                }
+            }
+            else if(!Objects.equals(s, "")&&!Objects.equals(s, ".")){
+                stack.push(s);
+            }
+        }
+        String res="";
+        while  (!stack.isEmpty()) {
+            res = "/" + stack.pop() + res;
+        }
+        return res.isEmpty() ? "/" : res;
+    }
 }
 
-class WaitNotifyExample {
-    private static final Object lock = new Object();
 
+public class LeetCode {
     public static void main(String[] args) {
-        // 生产者线程
-        Thread producer = new Thread(() -> {
-            synchronized (lock) {
-                try {
-                    System.out.println("Producer: Producing...");
-                    Thread.sleep(2000);
-                    System.out.println("Producer: Production finished. Notifying consumer.");
-                    // 唤醒等待的线程
-                    lock.notify();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        // 消费者线程
-        Thread consumer = new Thread(() -> {
-            synchronized (lock) {
-                try {
-                    System.out.println("Consumer: Waiting for production to finish.");
-                    // 进入等待状态
-                    lock.wait();
-                    System.out.println("Consumer: Production finished. Consuming...");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        consumer.start();
-        producer.start();
+        String input="/home/";
+        Solution s=new Solution();
+        String res=s.simplifyPath(input);
+        System.out.println(res);
     }
 }

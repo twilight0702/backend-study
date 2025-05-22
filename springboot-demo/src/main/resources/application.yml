@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/atguigu?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: YUyue0702
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # 自动建表（重要）
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

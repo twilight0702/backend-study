@@ -8,59 +8,45 @@
         "type": "tabs",
         "children": [
           {
-            "id": "7f18e0c38a49e95d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "面试/华为.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "华为"
-            }
-          },
-          {
             "id": "6cf277df3c125d08",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "八股/小林/4 Java并发编程面试题.md",
+                "file": "八股/小林/7 MySQL面试题.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4 Java并发编程面试题"
+              "title": "7 MySQL面试题"
             }
           },
           {
-            "id": "e348fd71b57fc48b",
+            "id": "6751248cbe429f2e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "volatile关键字.md",
+                "file": "面试/自我介绍.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "volatile关键字"
+              "title": "自我介绍"
             }
           },
           {
-            "id": "7de84cbc20341ac6",
+            "id": "0f437e02263b67d0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "停止线程的运行.md",
+                "file": "项目一问答.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "停止线程的运行"
+              "title": "项目一问答"
             }
           }
         ],
@@ -121,7 +107,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 295.5
+    "width": 295.5,
+    "collapsed": true
   },
   "right": {
     "id": "56a196002a9caf7b",
@@ -170,13 +157,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "八股/小林/4 Java并发编程面试题.md",
+                "file": "面试/自我介绍.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "4 Java并发编程面试题 的大纲"
+              "title": "自我介绍 的大纲"
             }
           },
           {
@@ -227,42 +214,44 @@
   },
   "active": "289c20cd0c33f7aa",
   "lastOpenFiles": [
-    "阻塞.md",
-    "八股/小林/4 Java并发编程面试题.md",
-    "study-java-maven/target/classes/com/Twilight/Day2/WaitNotifyExample.class",
-    "study-java-maven/target/classes/com/Twilight/Day2/LeetCode.class",
-    "study-java-maven/target/classes/com/Twilight/Day2",
-    "study-java-maven/target/classes/com/Twilight",
-    "study-java-maven/target/classes/com",
+    "study-java-maven/src/main/java/www/Twilight/day1/leedcode.java~",
+    "study-java-maven/target/classes/www/Twilight/day1/LRUCache.class",
+    "study-java-maven/target/classes/www/Twilight/day1/LRUCache$Node.class",
+    "study-java-maven/target/classes/www/Twilight/day1/Solution.class",
+    "study-java-maven/target/classes/www/Twilight/day1/ListNode.class",
+    "study-java-maven/target/classes/www/Twilight/day1/leedcode.class",
+    "项目一问答.md",
+    "面试/自我介绍.md",
+    "面试/深入项目.md",
+    "八股/小林/7 MySQL面试题.md",
     "volatile关键字.md",
-    "面试/华为.md",
-    "停止线程的运行.md",
-    "八股/小林/1.md",
-    "study-java-maven/src/main/java/com/Twilight/Day2/LeetCode.java~",
-    "八股/小林/17.md",
-    "八股/小林/16.md",
-    "八股/小林/15.md",
-    "八股/小林/14.md",
-    "八股/小林/13.md",
-    "八股/小林/12.md",
-    "八股/小林/11.md",
-    "八股/小林/10.md",
-    "八股/小林/9.md",
     "八股/小林/8.md",
-    "八股/小林/7.md",
-    "八股/小林/6.md",
     "八股/小林/5.md",
-    "八股/小林/3.md",
-    "八股/小林/2 Java基础面试题.md",
-    "othors/IntelliJ IDEA使用技巧汇总.md",
-    "study-java-maven/src/main/java/com/Twilight/Day2/LeedCode.java",
-    "study-java-maven/src/main/java/com/Twilight/Day2/LeetCode.java",
-    "study-java-maven/target/classes/com/Twilight/Day2/Solution.class",
-    "study-java-maven/target/classes/com/Twilight/Day2/LeedCode.class",
-    "othors/资源目录.md",
-    "othors/类加载器.md",
-    "othors/Lambda表达式.md",
-    "常量池.md",
+    "八股/小林/6.md",
+    "八股/小林/4 Java并发编程面试题.md",
+    "面试/面试准备.canvas",
+    "面试/ai 面试.md",
+    "面试/BERT、GPT架构对比.md",
+    "面试/HuggingFace.md",
+    "面试/LangChain.md",
+    "面试/MCP.md",
+    "面试/OpenWebUI.md",
+    "面试/RAG检索增强生成.md",
+    "面试/华为准备计划.md",
+    "面试/华为面经收集.md",
+    "停止线程的运行.md",
+    "各种锁.md",
+    "Pasted image 20250518172614.png",
+    "study-java-maven/target/classes/www/Twilight/day1/TestThread.class",
+    "study-java-maven/target/classes/www/Twilight/day1/MyThread.class",
+    "study-java-maven/src/main/java/www/Twilight/day1/MyThread.java~",
+    "study-java-maven/src/main/java/www/Twilight/day1/MyThread.java",
+    "study-java-maven/src/test/java/TreadTest.java",
+    "othors/一些好的up主.md",
+    "MySQL-study/笔记.md",
+    "阻塞.md",
+    "八股/小林/1.md",
+    "八股/小林/17.md",
     "1746946711942.jpg",
     "1746504188501.jpg",
     "Pasted image 20250505213330.png",
@@ -271,10 +260,8 @@
     "imgs/Pasted image 20250503180137.png",
     "JDBC/atguigu-jdbc/docs/resources/glass.png",
     "JDBC/atguigu-jdbc/docs/resources/x.png",
-    "面试/面试准备.canvas",
     "othors/软件架构实验二 计划.canvas",
     "imgs/Pasted image 20250419163321.png",
-    "imgs/Pasted image 20250419164218.png",
     "未命名 1.canvas"
   ]
 }
