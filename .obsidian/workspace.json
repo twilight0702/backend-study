@@ -4,81 +4,81 @@
     "type": "split",
     "children": [
       {
-        "id": "f28d73d04a6fd39c",
+        "id": "a42d8092c9c6c2b1",
         "type": "tabs",
         "children": [
           {
-            "id": "d52500c3039be833",
+            "id": "cdadb45b329cbed0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试/超级准备.md",
+                "file": "数据中台相关.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "超级准备"
+              "title": "数据中台相关"
             }
           },
           {
-            "id": "4c05f7f650c12604",
+            "id": "9d6995cf85ee546b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "八股/小林/10.md",
+                "file": "mapstruct.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "10"
+              "title": "mapstruct"
             }
           },
           {
-            "id": "30b1df5b6ab39d57",
+            "id": "08351953d05da879",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "面试/AI相关/RAG检索增强生成.md",
+                "file": "八股/小林/5 Java虚拟机面试题 JVM.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "RAG检索增强生成"
+              "title": "5 Java虚拟机面试题 JVM"
             }
           },
           {
-            "id": "a7a27416252abddf",
+            "id": "c49a51ef86cc14a7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "八股/小林/4 Java并发编程面试题.md",
+                "file": "忆伴——项目重构计划书.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "4 Java并发编程面试题"
+              "title": "忆伴——项目重构计划书"
             }
           },
           {
-            "id": "47e2bbbfbf3ea518",
+            "id": "35992fe02e5a3532",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "八股/小林/3 Java集合面试题.md",
+                "file": "othors/Git常用命令汇总.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "3 Java集合面试题"
+              "title": "Git常用命令汇总"
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -110,7 +110,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "wsl",
+                "query": " ",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -135,8 +135,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 295.5,
-    "collapsed": true
+    "width": 295.5
   },
   "right": {
     "id": "56a196002a9caf7b",
@@ -152,7 +151,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "面试/华为.md",
+                "file": "othors/服务器初试.md",
                 "collapseAll": true,
                 "extraContext": true,
                 "sortOrder": "alphabetical",
@@ -162,7 +161,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "华为 的反向链接列表"
+              "title": "服务器初试 的反向链接列表"
             }
           },
           {
@@ -171,12 +170,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "面试/华为.md",
+                "file": "othors/服务器初试.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "华为 的出链列表"
+              "title": "服务器初试 的出链列表"
             }
           },
           {
@@ -185,13 +184,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "八股/小林/4 Java并发编程面试题.md",
+                "file": "八股/小林/5 Java虚拟机面试题 JVM.md",
                 "followCursor": true,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "4 Java并发编程面试题 的大纲"
+              "title": "5 Java虚拟机面试题 JVM 的大纲"
             }
           },
           {
@@ -242,54 +241,54 @@
   },
   "active": "289c20cd0c33f7aa",
   "lastOpenFiles": [
-    "study-java-maven/target/classes/www/Twilight/T_1033.class",
-    "study-java-maven/target/classes/www/Twilight/T_1033$1.class",
-    "study-java-maven/target/classes/www/Twilight/T_1033$work.class",
-    "study-java-maven/target/classes/www/Twilight/T_1032.class",
-    "study-java-maven/target/classes/www/Twilight/T_1030.class",
-    "study-java-maven/target/classes/www/Twilight/T_1026.class",
-    "study-java-maven/target/classes/www/Twilight/T_1025.class",
-    "study-java-maven/target/classes/www/Twilight/T_1024.class",
-    "study-java-maven/target/classes/www/Twilight/T_1022.class",
-    "study-java-maven/target/classes/www/Twilight/T_1021.class",
-    "study-java-maven/target/classes/www/Twilight/T_1020.class",
-    "面试/华为一面问题总结.md",
-    "面试/超级准备.md",
-    "八股/小林/10.md",
-    "八股/小林/11.md",
-    "八股/小林/12 消息队列面试题.md",
-    "八股/小林/13.md",
-    "八股/小林/14.md",
-    "八股/小林/16.md",
-    "八股/小林/17.md",
-    "八股/Java基础.md",
-    "八股/小林/15.md",
-    "八股/小林/5.md",
+    "工程规范/springboot职责分层.md",
+    "工程规范/异常处理边界.md",
+    "待解决的问题.md",
+    "工程规范",
+    "othors/Git常用命令汇总.md",
+    "AI研发工程师学习路线规划.md",
+    "忆伴——项目重构计划书.md",
+    "mapstruct.md",
+    "数据中台相关.md",
+    "Mybatis-plus.md",
+    "spring controller.md",
+    "temp.md",
+    "imgs/Pasted image 20250716095857.png",
+    "othors/服务器初试.md",
+    "2025.7.11.md",
+    "MySQL-study/数据库表操作.md",
+    "面试/B站一面.md",
+    "study-java-maven/target/test-classes/www/Twilight/testJedis/Test1.class",
+    "study-java-maven/target/classes/www/Twilight/testJedis/JedisConnectionFactory.class",
+    "study-java-maven/target/classes/www/Twilight/testJedis",
+    "study-java-maven/src/test/java/www/Twilight/testJedis/Test1.java",
     "八股/小林/8 Redis面试题.md",
-    "八股/小林/9.md",
+    "面试/超级准备.md",
+    "八股/小林/7 MySQL面试题.md",
     "八股/小林/4 Java并发编程面试题.md",
-    "面试/AI相关/RAG检索增强生成.md",
-    "八股/小林/3 Java集合面试题.md",
-    "volatile关键字.md",
-    "面试/华为面经收集.md",
-    "面试/华为准备计划.md",
-    "面试/简历优化.md",
-    "面试/深入项目.md",
-    "面试/自我介绍.md",
-    "面试/AI相关/ai 面试.md",
-    "面试/AI相关/BERT、GPT架构对比.md",
-    "面试/面试准备.canvas",
+    "八股/小林/5 Java虚拟机面试题 JVM.md",
+    "othors/JVM 的垃圾回收器（GC）.md",
+    "JVM内存模型.md",
+    "八股/小林/16.md",
+    "八股/小林/15.md",
+    "八股/小林/14.md",
+    "八股/小林/13 分布式面试题.md",
+    "study-java-maven/src/test/java/www/Twilight/testJedis/testJedis.java~",
+    "study-java-maven/src/main/java/www/Twilight/testJedis/JedisConnectionFactory.java~",
+    "study-java-maven/src/main/java/www/Twilight/testJedis/JedisConnectionFactory.java",
+    "study-java-maven/target/classes/www/Twilight/Test.class",
+    "study-java-maven/target/classes/www/Twilight/day1/DemoService.class",
+    "imgs/1746946711942.jpg",
+    "imgs/Pasted image 20250518172614.png",
+    "imgs/Pasted image 20250505213330.png",
+    "imgs/Pasted image 20250503180318.png",
+    "imgs/Pasted image 20250503180322.png",
     "othors/软件架构实验二 计划.canvas",
-    "Pasted image 20250518172614.png",
-    "1746946711942.jpg",
-    "1746504188501.jpg",
-    "Pasted image 20250505213330.png",
-    "Pasted image 20250503180322.png",
-    "Pasted image 20250503180318.png",
+    "面试/面试准备.canvas",
+    "imgs/1746504188501.jpg",
     "imgs/Pasted image 20250503180137.png",
     "JDBC/atguigu-jdbc/docs/resources/glass.png",
     "JDBC/atguigu-jdbc/docs/resources/x.png",
-    "imgs/Pasted image 20250419163321.png",
     "未命名 1.canvas"
   ]
 }

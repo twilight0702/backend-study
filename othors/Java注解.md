@@ -127,13 +127,13 @@ List list = new ArrayList();
 
 Java 提供了 5 个元注解，用于描述自定义注解的行为：
 
-|注解名|作用描述|
-|---|---|
-|`@Target`|指定注解作用的位置（类、方法等）|
-|`@Retention`|指定注解保留级别（源码/类文件/运行时）|
-|`@Documented`|是否将注解包含在 Javadoc 中|
-|`@Inherited`|子类是否继承父类的注解|
-|`@Repeatable`|是否支持重复注解（Java 8+）|
+| 注解名           | 作用描述                 |
+| ------------- | -------------------- |
+| `@Target`     | 指定注解作用的位置（类、方法等）     |
+| `@Retention`  | 指定注解保留级别（源码/类文件/运行时） |
+| `@Documented` | 是否将注解包含在 Javadoc 中   |
+| `@Inherited`  | 子类是否继承父类的注解          |
+| `@Repeatable` | 是否支持重复注解（Java 8+）    |
 
 示例：
 
@@ -169,16 +169,16 @@ public class MyClass {
 
 ### 可以做什么
 
-|用途|示例|
-|---|---|
-|自动注入 / 依赖注入|`@Autowired`、`@Inject`|
-|权限控制|`@RequiresPermission`|
-|参数校验|`@NotNull`、`@Size`|
-|ORM 映射|`@Table`、`@Column`|
-|接口映射（Web框架）|`@RequestMapping`|
-|代码生成（注解处理器）|`@AutoService`, `@Builder`|
-|日志埋点 / AOP|`@LogTime`|
-|自定义测试框架|`@Test`, `@Benchmark`|
+| 用途          | 示例                         |
+| ----------- | -------------------------- |
+| 自动注入 / 依赖注入 | `@Autowired`、`@Inject`     |
+| 权限控制        | `@RequiresPermission`      |
+| 参数校验        | `@NotNull`、`@Size`         |
+| ORM 映射      | `@Table`、`@Column`         |
+| 接口映射（Web框架） | `@RequestMapping`          |
+| 代码生成（注解处理器） | `@AutoService`, `@Builder` |
+| 日志埋点 / AOP  | `@LogTime`                 |
+| 自定义测试框架     | `@Test`, `@Benchmark`      |
 ### 详细实现（反射 + JDK动态代理）
 
 这里举例：写一个用于类的注解，如果类加上了这个注解，就输出类的运行时长

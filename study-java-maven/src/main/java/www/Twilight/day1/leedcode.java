@@ -5,27 +5,65 @@ import java.util.*;
 public class leedcode {
     public static void main(String[] args) {
         Solution solution = new Solution();
-        //[7,1,5,3,6,4]
-        System.out.println(solution.maxProfit(new int[]{7,1,5,3,6,4}));
+
+        //head = [1,2,3,4,5], k = 2
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+        System.out.println(solution.reverseKGroup(head,2));
 
     }
 }
 
-
 class Solution {
-    public int maxProfit(int[] prices) {
-        int start=prices[0];
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode left=head;
+        ListNode right=head;
+        ListNode top=new ListNode(0);
 
-        int sum=0;
-        for(int i=1;i<prices.length;i++){
-            if(prices[i]<prices[i-1]){
-                sum+=prices[i-1]-start;
-                start=prices[i];
+        ListNode lastEnd=top;
+
+        while(true){
+            for(int i=0;i<k-1&&right!=null;i++){
+                right=right.next;
             }
-        }
-        sum+=prices[prices.length-1]-start;
 
-        return sum;
+            if(right==null){
+                lastEnd.next=left;
+                break;
+            }
+
+            ListNode a=right.next;
+            List<ListNode> nodes=work(left,right);
+            lastEnd.next=nodes.get(0);
+            nodes.get(1).next=a;
+            lastEnd=nodes.get(1);
+            left=a;
+            right=a;
+        }
+
+        return top.next;
+
+    }
+
+    private List<ListNode> work(ListNode left,ListNode right){
+        ListNode pre=right.next;
+        ListNode temp=left;
+        ListNode end=right.next;
+        while(temp!=end){
+            ListNode a=temp.next;
+            temp.next=pre;
+            pre=temp;
+            temp=a;
+        }
+
+        List<ListNode> res=new ArrayList<>();
+        res.add(right);
+        res.add(left);
+
+        return res;
     }
 }
 
