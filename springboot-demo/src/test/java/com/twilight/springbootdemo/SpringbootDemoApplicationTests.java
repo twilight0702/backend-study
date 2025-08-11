@@ -1,10 +1,10 @@
-package com.twilight.spingbootdemo;
+package com.twilight.springbootdemo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpingbootDemoApplicationTests {
+class SpringbootDemoApplicationTests {
 
     @Test
     void contextLoads() {
