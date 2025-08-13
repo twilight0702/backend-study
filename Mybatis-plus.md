@@ -1,4 +1,4 @@
-# 使用
+# 1 使用
 
 需要先定义好entity类
 
@@ -35,11 +35,11 @@ public class MybatisPlusConfig {
 因此，你的 `PopUpMapper` 接口即使没有加 `@Mapper` 注解，也会被自动扫描并注入到 Spring 容器中，且 MyBatis-Plus 会帮你生成代理实现。
 
 
-# 自定义查询
+# 2 自定义查询
 
 Mybatis-plus本身已经提供了很多预制好的查询函数，但也可以自定义查询sql
 
-## 使用注解
+## 2.1 使用注解
 
 ```java
 @Mapper
@@ -85,7 +85,7 @@ public interface UserMapper extends BaseMapper<User> {
 List<UserDTO> selectNameAndAge(@Param("status") Integer status);
 
 ```
-## 使用xml配置
+## 2.2 使用xml配置
 
 接口：
 ```java
@@ -111,7 +111,7 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
 ```
 
-## 动态条件查询wrapper
+## 2.3 动态条件查询wrapper
 
 动态构建where部分语句，用于查询
 
@@ -135,9 +135,11 @@ List<User> list = userMapper.selectList(query);
 ```
 
 
-# 应用
+# 3 应用
 
-## 分页查询
+## 3.1 分页查询
+
+### 3.1.1 简单例子
 
 ```java
 Page<User> page = new Page<>(1, 10); // 当前页，每页条数
@@ -147,7 +149,109 @@ wrapper.eq(User::getStatus, 1);
 IPage<User> result = userMapper.selectPage(page, wrapper);
 ```
 
-# Entity类
+### 3.1.2 较复杂的例子
+
+#### 3.1.2.1 思路
+
+1. **使用 MyBatis-Plus `Page` 类**
+    - 内置了 `current`（页码）、`size`（每页大小）、`total`、`pages` 等属性。
+    - 自动帮你计算分页 SQL 和总数，不用写两次 SQL。
+2. **Mapper 方法直接返回 `IPage<VO>`**
+    - 省去 `countStaffList` 这个方法。
+3. **参数校验建议放在统一的 Request 参数校验里**
+    - 可以用 `@Validated` + `@Min`、`@Max` 注解，而不是手动 if 判断。
+
+#### 3.1.2.2 代码
+
+1. DTO 校验
+
+```java
+@Data
+public class StaffQueryDTO {
+
+    @Min(value = 1, message = "页码必须大于0")
+    private int page;
+
+    @Min(value = 1, message = "每页大小必须大于0")
+    @Max(value = 100, message = "每页大小不能超过100")
+    private int size;
+
+    private String cardnum;
+    private String name;
+}
+```
+
+2. Mapper（分页查询合并成一个方法）
+
+```java
+@Select("<script>" +
+        "SELECT s.id, s.cardnum, s.name, s.create_time, s.update_time " +
+        "FROM STAFF_INFO s " +
+        "WHERE s.is_del = 0 " +
+        "<if test='cardnum != null and cardnum != \"\"'>" +
+        "    AND s.cardnum LIKE CONCAT('%', #{cardnum}, '%') " +
+        "</if>" +
+        "<if test='name != null and name != \"\"'>" +
+        "    AND s.name LIKE CONCAT('%', #{name}, '%') " +
+        "</if>" +
+        "ORDER BY s.create_time DESC" +
+        "</script>")
+IPage<StaffListVO> selectStaffList(Page<?> page, @Param("cardnum") String cardnum, @Param("name") String name);
+```
+
+2. Service（简化后的分页逻辑）
+
+```java
+public PageResultVO<StaffListVO> getStaffList(StaffQueryDTO queryDTO) {
+    log.info("开始查询教师列表，查询条件：{}", queryDTO);
+
+    // 创建分页对象
+    Page<StaffListVO> page = new Page<>(queryDTO.getPage(), queryDTO.getSize());
+
+    // 调用 Mapper
+    IPage<StaffListVO> resultPage = staffInfoMapper.selectStaffList(
+            page,
+            queryDTO.getCardnum(),
+            queryDTO.getName()
+    );
+
+    // 封装返回结果
+    return new PageResultVO<>(
+            resultPage.getRecords(),
+            resultPage.getTotal(),
+            resultPage.getCurrent(),
+            resultPage.getSize(),
+            resultPage.getPages()
+    );
+}
+```
+
+4. PageResultVO（保持你的结构）
+
+```java
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PageResultVO<T> {
+    private List<T> list;
+    private long total;
+    private long page;
+    private long size;
+    private long pages;
+}
+```
+
+---
+
+#### 3.1.2.3 优势
+
+- **SQL 只写一次**，MyBatis-Plus 会帮你生成 count 查询。
+- **不用手动计算 offset、totalPages**。
+- **参数校验交给 Bean Validation**，业务代码更干净。
+- **可扩展性好**，以后换排序、加条件都容易改。
+
+---
+# 4 Entity类
 
 示例写法：
 
@@ -283,7 +387,7 @@ public class PopUp{
 
 注意以entity为中心，统一字段命名
 
-# Service
+# 5 Service
 
  `@Transactional`
 
@@ -305,7 +409,7 @@ public class PopUpService extends ServiceImpl<PopUpMapper,PopUp> {
 }
 ```
 
-# Maven 配置
+# 6 Maven 配置
 
 示例：
 ```xml
